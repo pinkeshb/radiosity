@@ -6,7 +6,7 @@ import sys
 from wavedecs import *
 
 
-n=32
+n=16
 
 
 ts=time.time()
@@ -42,5 +42,8 @@ while(not diag(B)*B-diag(B_pre)*B_pre == zeros(n,1)):
 	# else:
 	# 	check=False
 	iter+=1
-print "\n\n\nB"+str(iter)+"=", B*pow(n,0.5)
-fo.write("\n\n\nB"+str(iter)+"="+str(B*pow(n,0.5)))
+print "\n\n\nB"+str(iter)+"=", B
+fo.write("\n\n\nB"+str(iter)+"="+str(B))
+
+print "\n\n\nB_phi"+str(iter)+"=", idwt(B)*pow(n,0.5)
+fo.write("\n\n\nB_phi"+str(iter)+"="+str(idwt(B)*pow(n,0.5)))
