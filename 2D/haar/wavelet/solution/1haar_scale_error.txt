@@ -1,0 +1,6 @@
+num=0
+den=0.333333333333333
+K_error<function K_error at 0x7ffbb8ba9668>
+K[3.55027377241725e-25]
+relative_error0.0
+relative_error_%0.0 % 
