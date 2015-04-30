@@ -26,9 +26,9 @@ def dia_trans(x,a,s,f,m):
 # print pow(1.732050808,math.log(2,2))
 if __name__=="__main__":
 	x=linspace(0,1,250)
-	m=0
-	f=lambda s: dia_trans(s,0.5,0,phi_CAS,m)*1
-	print quad(f,[0,1])
+	m=-1
+	f=lambda s: dia_trans(s,0.25,0,phi_CAS,m)
+	print quad(f,[0,0.25])
 	y=[f(z) for z in x]
 
 	pyplot.plot(x,y)
