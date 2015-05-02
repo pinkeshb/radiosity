@@ -3,7 +3,7 @@ from m3_phi import *
 from matplotlib import pyplot
 def project_kernel_m3_phi(n):
 	# kernel
-	f1 = lambda s, t: s*s-t
+	f1 = lambda s, t: s-t
 	# basis
 	# amplitude=pow(n,0.5)
 	# f2 = lambda s: amplitude
@@ -50,6 +50,8 @@ def project_kernel_m3_phi(n):
 			# print f
 			K[i,j]=quad(f,[(i/3)/float(n),((i/3)+1)/float(n)],[(j/3)/float(n),((j/3)+1)/float(n)])
 			print [(i/3)/float(n),((i/3)+1)/float(n)],[(j/3)/float(n),((j/3)+1)/float(n)]
+			if abs(K[i,j])<=0.0000000001:
+				K[i,j]=0
 			# K[i,j]=i*j
 
 	return K
