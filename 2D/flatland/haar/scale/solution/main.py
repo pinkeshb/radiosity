@@ -62,7 +62,6 @@ def main_fn(n, thres):
                 (B2[i] - B2_pre[i]) * (B2[i] - B2_pre[i])
         if change_energy < thres:
             converged = True
-        iter += 1
     print "final"
     print "\n\n\nB1  " + str(iter) + "=", B1 * pow(n, 0.5)
     fo.write("\n\n\nB1  " + str(iter) + "=" + str(B1 * pow(n, 0.5)))
