@@ -110,12 +110,18 @@ if __name__=="__main__":
 		])
 	# print K
 	# print dwt2(K)
-	e=matrix([[1,1,1,1,1,1,1,0]])
-	print e
-	print dwt(e)
-	print idwt(dwt(e))
+	# e=matrix([[1,1,1,1,1,1,1,0]])
+	# print e
+	# print dwt(e)
+	# print idwt(dwt(e))
 	# print dwt_inside(e)
 	# print idwt_inside(dwt_inside(e))
 	# print K[0,:]
 	# print idwt2(dwt2(K))
 	# print idwt(matrix([[1,1,1,1]]).transpose())
+	# e = matrix([[1, 1, 1, 1, 1, 1, 1, 0]])
+	# print e
+	# print dwt(e)
+	# print idwt(dwt(e))
+	print dwt2(K)
+	print idwt2(dwt2(K))

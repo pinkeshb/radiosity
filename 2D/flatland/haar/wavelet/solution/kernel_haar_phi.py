@@ -1,7 +1,7 @@
 from mpmath import *
 def project_kernel_haar_phi(n):
 	# kernel
-	f1 = lambda s, t: 0.25*0.25*0.25*0.25/ (2*pow(((s - t) * (s - t) + 0.25*0.25*0.25*0.25), 1.5))
+	f1 = lambda s, t:	1/ (2*pow(((s - t) * (s - t) + 1), 1.5))
 	# basis
 	amplitude=pow(n,0.5)
 	f2 = lambda s: amplitude
