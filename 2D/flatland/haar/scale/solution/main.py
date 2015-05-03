@@ -27,7 +27,7 @@ def main_fn(n, thres):
     B1_pre = B1 + 1
     B2_pre = B2 + 1
 
-    iter = 1
+    iter = 0
     converged = False
 
     print "B1  " + str(iter) + "=", B1
