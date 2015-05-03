@@ -38,6 +38,16 @@ def dwt2(K):
 		K_dwt[i,:]=dwt(K_dwt_i[i,:]).transpose()
 	return K_dwt
 
+def idwt2(K):
+	K_dwt=copy.deepcopy(K)
+	K_dwt_i=copy.deepcopy(K)
+	for i in range(K.rows):
+		print i
+		K_dwt_i[i,:]=idwt(K[i,:].transpose()).transpose()
+	for i in range(K.cols):
+		K_dwt[:,i]=idwt(K_dwt_i[:,i])
+
+	return K_dwt
 def idwt_inside(E):
 	# print E
 	# print type(E)
