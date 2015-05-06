@@ -17,7 +17,9 @@ B=[   0.3550636358244,0.0003958436200413, 0.365347954748293,0.0071251851607434, 
 y=[get_pix(x,B,n) for x in m]
 b = lambda s:8.0/9.0*s*s*s*s+32.0/45.0
 y_ideal=[b(x) for x in m]
+y_error=[y_ideal[i]-y[i] for i in range(250)]
 pyplot.plot(y)
 pyplot.plot(y_ideal)
+pyplot.plot(y_error)
 # print y ,"y"
 pyplot.show()
