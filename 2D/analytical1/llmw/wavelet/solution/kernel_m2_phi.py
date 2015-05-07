@@ -13,21 +13,22 @@ def project_kernel_m2_phi(n):
 	# f = lambda s,t: f1(s,t)*f3(t)*f2(s)
 	m=linspace(0,1,250)
 	K=matrix(n*2,n*2)
+	a=1.0/n
 	for i in range(0,n*2):
 		for j in range(0,n*2):
 			if i%2==0 and j%2==0:
 				print 11
-				f=lambda s,t: f1(s,t)*dia_trans(s,0.25,(i/2)/float(n),phi_1_m2)*dia_trans(t,0.25,(j/2)/float(n),phi_1_m2)
+				f=lambda s,t: f1(s,t)*dia_trans(s,a,(i/2)/float(n),phi_1_m2)*dia_trans(t,a,(j/2)/float(n),phi_1_m2)
 			if i%2==0 and j%2==1:
 				print 12
-				f=lambda s,t: f1(s,t)*dia_trans(s,0.25,(i/2)/float(n),phi_1_m2)*dia_trans(t,0.25,(j/2)/float(n),phi_2_m2)
+				f=lambda s,t: f1(s,t)*dia_trans(s,a,(i/2)/float(n),phi_1_m2)*dia_trans(t,a,(j/2)/float(n),phi_2_m2)
 			if i%2==1 and j%2==0:
 				print 21
-				f=lambda s,t: f1(s,t)*dia_trans(s,0.25,(i/2)/float(n),phi_2_m2)*dia_trans(t,0.25,(j/2)/float(n),phi_1_m2)
+				f=lambda s,t: f1(s,t)*dia_trans(s,a,(i/2)/float(n),phi_2_m2)*dia_trans(t,a,(j/2)/float(n),phi_1_m2)
 			if i%2==1 and j%2==1:
 				print 22
-				f=lambda s,t: f1(s,t)*dia_trans(s,0.25,(i/2)/float(n),phi_2_m2)*dia_trans(t,0.25,(j/2)/float(n),phi_2_m2)
-				# y=[dia_trans(z,0.25,(i/2)/float(n),phi_1_m2) for z in m]
+				f=lambda s,t: f1(s,t)*dia_trans(s,a,(i/2)/float(n),phi_2_m2)*dia_trans(t,a,(j/2)/float(n),phi_2_m2)
+				# y=[dia_trans(z,a,(i/2)/float(n),phi_1_m2) for z in m]
 				# pyplot.plot(m,y)
 				# # print y ,"y"
 				# pyplot.show()
@@ -39,16 +40,16 @@ def project_kernel_m2_phi(n):
 
 	return K
 
-# print project_kernel_m2_phi(4)
+print project_kernel_m2_phi(8)
 # m=linspace(0,1,250)
 # i=0
 # j=1
 # f1 = lambda s, t: s-t
-# f=lambda s,t: f1(s,t)*dia_trans(s,0.25,(i/2)/float(n),phi_1_m2)*dia_trans(t,0.25,(j/2)/float(n),phi_2_m2)
+# f=lambda s,t: f1(s,t)*dia_trans(s,a,(i/2)/float(n),phi_1_m2)*dia_trans(t,a,(j/2)/float(n),phi_2_m2)
 # n=4
 # print [(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)]
 # print quad(f,[(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)])
-# y=[dia_trans(z,0.25,(i/2)/float(n),phi_1_m2) for z in m]
+# y=[dia_trans(z,a,(i/2)/float(n),phi_1_m2) for z in m]
 # pyplot.plot(m,y)
 # # print y ,"y"
 # pyplot.show()
