@@ -46,7 +46,7 @@ def project_it(B1,B2,n):
 def plot_it():
 
     n=4
-    B1,B2=main_fn(n,0.001,4) 
+    B1,B2=main_fn(n,0.001,64) 
     # B1 = [ 1]*8
     # B2 =  [ 1]*8
     # B1 = [   0.0179987374259207,  0.00109046436648919,   0.0210336946311762, 0.000612308039260389,   0.0218859058672152,-0.000140315475224752,    0.520100786697704,-0.000860807260604174]
@@ -86,14 +86,14 @@ def plot_it():
     # print pix1[x-1][y-1]
     max=-10
     for i in range(x):
-        print i/float(x)
+        # print i/float(x)
         pix1[i]=get_pix(i/float(x),B1,n)
         if pix1[i]>max:
             max = pix1[i]
     pix2=[0]*x
     print "max",max
     for i in range(x):
-        print i/float(x)
+        # print i/float(x)
         pix2[i]=get_pix(i/float(x),B2,n)
         if pix2[i]>max:
             max = pix2[i]
@@ -130,6 +130,9 @@ def plot_it():
             # print pixels[i,j]
      
     img2.show()
+
+    img2.save("./b2_"+str(n)+"_","bmp")
+
     img1 = Image.new( 'RGB', (x,y), "black") # create a new black image
     pixels1 = img1.load() # create the pixel map
      
@@ -142,6 +145,6 @@ def plot_it():
             # print pixels[i,j]
      
     img1.show()
-
+    img1.save("./b1_"+str(n)+"_","bmp")
 
 plot_it()
