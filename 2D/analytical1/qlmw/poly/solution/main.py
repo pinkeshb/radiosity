@@ -1,25 +1,7 @@
 from kernel_m3_phi import *
 from mpmath import *
 import sys
-def B_Error(B,n):
-	b = lambda s:12.0/13.0*s+6.0/13.0
-	print n
-	B_error=zeros(n,1)
-	a=1.0/n
-	for i in range(n):
-		print i,"afdjahdf"
-		b_error=lambda s:(b(s)-B[3*i]*dia_trans(s, a, i  / float(n), phi_0_m3)-\
-                    B[3*i+1]*dia_trans(s, a, i  / float(n), phi_1_m3)-\
-                    B[3*i+2]*dia_trans(s, a, i  / float(n), phi_2_m3))*\
-						(b(s)-B[3*i]*dia_trans(s, a, i  / float(n), phi_0_m3)-\
-                    B[3*i+1]*dia_trans(s, a, i  / float(n), phi_1_m3)-\
-                    B[3*i+2]*dia_trans(s, a, i  / float(n), phi_2_m3)
-                    )
-		B_error[i]=quad(b_error,[i / float(n), (i + 1) / float(n)])
-		print B_error[i]
 
-		print i,"afdjahdf"
-	return B_error
 
 
 def main_fn(n, thres):
@@ -27,7 +9,7 @@ def main_fn(n, thres):
     fo = open(fname, "w")
 
 
-    K,K_error=project_kernel_m3_phi(n)
+    K=project_kernel_m3_phi(n)
     E=matrix([[0]*n*3]).transpose()
     for i in range(n*3):
         if i%3==0:
@@ -69,10 +51,7 @@ def main_fn(n, thres):
 
     print "\n\n\nB"+str(iter)+"=", B
     fo.write("\n\n\nB"+str(iter)+"="+str(B))
-
-    B_error=B_Error(B,n)
-    print "B_error",B_error
-    return B,B_error,K,K_error
+    return B
 if __name__ == "__main__":
     thres = 0.001
     print main_fn(4, thres)
