@@ -49,22 +49,38 @@ def project_kernel_m2_phi(n):
     K_error =matrix(n,n)
     for i in range(0, n):
         for j in range(0, n):
-            f_error = lambda s, t: (f1(s, t) - K[2*i, 2*j] * dia_trans(s, a, (2*i / 2) / float(n),
-                                              phi_1_m2) * dia_trans(t, a, (2*j / 2) / float(n), phi_1_m2)
-                                                - K[2*i, 2*j+1] * dia_trans(s, a, (2*i / 2) / float(n),
-                                              phi_1_m2) * dia_trans(t, a, ((2*j+1) / 2) / float(n), phi_2_m2)
-                                                - K[2*i+1, 2*j] * dia_trans(s, a, ((2*i+1) / 2) / float(n),
-                                              phi_2_m2) * dia_trans(t, a, (2*j / 2) / float(n), phi_1_m2)
-                                                - K[2*i+1, 2*j+1] * dia_trans(s, a, ((2*i+1) / 2) / float(n),
-                                              phi_2_m2) * dia_trans(t, a, ((2*j+1) / 2) / float(n), phi_2_m2))*\
-                                    (f1(s, t) - K[2*i, 2*j] * dia_trans(s, a, (2*i / 2) / float(n),
-                                              phi_1_m2) * dia_trans(t, a, (2*j / 2) / float(n), phi_1_m2)
-                                                - K[2*i, 2*j+1] * dia_trans(s, a, (2*i / 2) / float(n),
-                                              phi_1_m2) * dia_trans(t, a, ((2*j+1) / 2) / float(n), phi_2_m2)
-                                                - K[2*i+1, 2*j] * dia_trans(s, a, ((2*i+1) / 2) / float(n),
-                                              phi_2_m2) * dia_trans(t, a, (2*j / 2) / float(n), phi_1_m2)
-                                                - K[2*i+1, 2*j+1] * dia_trans(s, a, ((2*i+1) / 2) / float(n),
-                                              phi_2_m2) * dia_trans(t, a, ((2*j+1) / 2) / float(n), phi_2_m2))
+            f_error = lambda s, t: (f1(s, t) - K[2*i, 2*j] * dia_trans(s, a, (i) / float(n),
+                                              phi_1_m2) * dia_trans(t, a, (j) / float(n), phi_1_m2)
+                                                - K[2*i, 2*j+1] * dia_trans(s, a, (i) / float(n),
+                                              phi_1_m2) * dia_trans(t, a, (j) / float(n), phi_2_m2)
+                                                - K[2*i+1, 2*j] * dia_trans(s, a, (i) / float(n),
+                                              phi_2_m2) * dia_trans(t, a, (j) / float(n), phi_1_m2)
+                                                - K[2*i+1, 2*j+1] * dia_trans(s, a, (i) / float(n),
+                                              phi_2_m2) * dia_trans(t, a, (j) / float(n), phi_2_m2))*\
+                                    (f1(s, t) - K[2*i, 2*j] * dia_trans(s, a, (i) / float(n),
+                                              phi_1_m2) * dia_trans(t, a, (j) / float(n), phi_1_m2)
+                                                - K[2*i, 2*j+1] * dia_trans(s, a, (i) / float(n),
+                                              phi_1_m2) * dia_trans(t, a, (j) / float(n), phi_2_m2)
+                                                - K[2*i+1, 2*j] * dia_trans(s, a, (i) / float(n),
+                                              phi_2_m2) * dia_trans(t, a, (j) / float(n), phi_1_m2)
+                                                - K[2*i+1, 2*j+1] * dia_trans(s, a, (i) / float(n),
+                                              phi_2_m2) * dia_trans(t, a, (j) / float(n), phi_2_m2))
+            # f_error = lambda s, t: (f1(s, t) - K[2*i, 2*j] * dia_trans(s, a, (2*i / 2) / float(n),
+            #                                   phi_1_m2) * dia_trans(t, a, (2*j / 2) / float(n), phi_1_m2)
+            #                                     - K[2*i, 2*j+1] * dia_trans(s, a, (2*i / 2) / float(n),
+            #                                   phi_1_m2) * dia_trans(t, a, ((2*j+1) / 2) / float(n), phi_2_m2)
+            #                                     - K[2*i+1, 2*j] * dia_trans(s, a, ((2*i+1) / 2) / float(n),
+            #                                   phi_2_m2) * dia_trans(t, a, (2*j / 2) / float(n), phi_1_m2)
+            #                                     - K[2*i+1, 2*j+1] * dia_trans(s, a, ((2*i+1) / 2) / float(n),
+            #                                   phi_2_m2) * dia_trans(t, a, ((2*j+1) / 2) / float(n), phi_2_m2))*\
+            #                         (f1(s, t) - K[2*i, 2*j] * dia_trans(s, a, (2*i / 2) / float(n),
+            #                                   phi_1_m2) * dia_trans(t, a, (2*j / 2) / float(n), phi_1_m2)
+            #                                     - K[2*i, 2*j+1] * dia_trans(s, a, (2*i / 2) / float(n),
+            #                                   phi_1_m2) * dia_trans(t, a, ((2*j+1) / 2) / float(n), phi_2_m2)
+            #                                     - K[2*i+1, 2*j] * dia_trans(s, a, ((2*i+1) / 2) / float(n),
+            #                                   phi_2_m2) * dia_trans(t, a, (2*j / 2) / float(n), phi_1_m2)
+            #                                     - K[2*i+1, 2*j+1] * dia_trans(s, a, ((2*i+1) / 2) / float(n),
+            #                                   phi_2_m2) * dia_trans(t, a, ((2*j+1) / 2) / float(n), phi_2_m2))
 
 
             K_error[i, j] = quad(f_error, [i / float(n), (i + 1) / float(n)],
