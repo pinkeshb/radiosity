@@ -1,7 +1,8 @@
 from mpmath import *
 def project_kernel_haar_phi(n):
 	# kernel
-	f1 = lambda s, t:	1/ (2*pow(((s - t) * (s - t) + 1), 1.5))
+	dist=0.25
+	f1 = lambda s, t:	dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
 	# basis
 	amplitude=pow(n,0.5)
 	f2 = lambda s: amplitude
@@ -13,7 +14,7 @@ def project_kernel_haar_phi(n):
 	K=matrix(n,n)
 	for i in range(0,n):
 		for j in range(0,n):
-			K[i,j]=quad(f,[i/float(n),(i+1)/float(n)],[j/float(n),(j+1)/float(n)])
+			K[i,j]=quad(f,[i/float(n),(i+1)/float(n)],[j/float(n),(j+1)/float(n)],method='gauss-legendre')
 			print [i/float(n),(i+1)/float(n)],[j/float(n),(j+1)/float(n)]
 			# K[i,j]=i*j
 

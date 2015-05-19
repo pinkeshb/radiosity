@@ -1,0 +1,111 @@
+VMODEL VERSION 0.60
+
+OBJECT: Cornell Box
+AUTHOR: Michael Granz
+DATE  : 07.07.1999
+UPDATE: 02.11.2001 ! old WinOSi .scn scene file converted to new VModel 0.6 syntax
+UPDATE: 02.11.2001 ! boxes are now cube-primitives instead of parallelograms
+
+! This scene file describes the famous "Cornell Box", which is a test scene
+! commonly used to demonstrate radiosity.
+
+Settings {
+  DiffShots  =   4
+  DiffDepth  =   3
+  SpecDepth  =   0
+
+  GlobalIOR  = 1.0
+
+  BACKGROUND   0.0, 0.0, 0.0     ! black
+  AMBIENT      0.3, 0.3, 0.3     ! some diffuse illumination
+}
+
+View {
+  Camera = 280, 800,  275
+  Target = 280,   0,  275
+  Up     = 0.0, 0.0,  1.0
+  FOVang = 0.7
+}
+
+Material grey {
+  Reflection   = 0.75                         ! grey
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material yellow {
+  Reflection   = RGB(0.75, 0.65, 0.35)        ! yellow
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material green {
+  Reflection   = RGB(0.15, 0.65, 0.15)        ! green
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material red {
+  Reflection   = RGB(0.75, 0.05, 0.05)        ! red
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.3                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+PARALLELOGRAM Light {
+  Material Light
+  BASE     =  213.0, -227.0,  548.0
+  EDGE1    =  130.0,    0.0,    0.0
+  EDGE2    =    0.0, -105.0,    0.0
+}
+
+PARALLELOGRAM Floor {
+  Material grey
+  BASE     =    0.0,    0.0,    0.0
+  EDGE1    =    0.0, -560.0,    0.0
+  EDGE2    =  560.0,    0.0,    0.0
+}
+
+PARALLELOGRAM Ceiling {
+  Material grey
+  BASE     =    0.0,    0.0,  550.0
+  EDGE1    =  560.0,    0.0,    0.0
+  EDGE2    =    0.0, -560.0,    0.0
+}
+
+PARALLELOGRAM back_wall {
+  Material grey
+  BASE     =    0.0, -560.0,    0.0
+  EDGE1    =    0.0,    0.0,  550.0
+  EDGE2    =  560.0,    0.0,    0.0
+}
+
+PARALLELOGRAM right_wall {
+  Material green
+  BASE     =    0.0,    0.0,    0.0
+  EDGE1    =    0.0,    0.0,  550.0
+  EDGE2    =    0.0, -560.0,    0.0
+}
+
+PARALLELOGRAM left_wall {
+  Material red
+  BASE     =  560.0,    0.0,    0.0
+  EDGE1    =    0.0, -560.0,    0.0
+  EDGE2    =    0.0,    0.0,  550.0
+}
+
+Cube "short box" {
+  Material yellow
+  Scale 165; Rotate_Z 253°; Translate 187,-168,83
+}
+
+Cube "large box" {
+  Material yellow
+  Stretch 165,165,346; Rotate_Z -73°; Translate 368,-350,173
+}

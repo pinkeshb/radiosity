@@ -1,0 +1,217 @@
+VMODEL VERSION 0.60
+
+OBJECT: Global Illumination Test Scene 2
+AUTHOR: Michael Granz
+DATE  : 14.02.2002
+
+Settings {
+  HitBuffers = 300
+
+  DiffShots  =   4
+  DiffDepth  =   3
+  SpecDepth  =   4
+
+  GlobalIOR  =   1.0
+}
+
+! ------------------------------ views ---------------------------------------
+
+View {
+  Camera -1.27,  3.00, 1.25
+  Target  0.33, -0.14, 1.25
+  Up      0.00,  0.00, 1.00
+  FoVAng  42.0°
+}
+
+VIEW Front-View {
+  Camera  0.75,  3.60, 1.25
+  Target  0.75,  0.00, 1.25
+  Up      0.00,  0.00, 1.00
+  FOVang  42.0°
+}
+
+! -------------------------- materials ---------------------------------------
+
+Material white {
+  Reflection   = 0.92                         ! white
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material green {
+  Reflection   = RGB(0.10, 0.95, 0.10)        ! green
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material red {
+  Reflection   = RGB(0.95, 0.10, 0.10)        ! red
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material brass {
+  Reflection   = RGB(0.9, 0.6, 0.3)           ! gold
+  Specularity  = 0.5, Exponent 30             ! dirty mirror
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Mirror {
+  Reflection   = 0.9                          ! bright
+  Specularity  = 0.9                          ! Mirror
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Glass {
+  Emission     = 0.0                          ! no light emission
+  Reflection   = frf(0)                       ! reflection by fresnel formula
+  Absorption   = RGB(0.35, 0.20, 0.30) / 0.5  ! 20%-30% absorption at 50cm depth
+  Specularity  = 1.0                          ! ideal mirror - purely specular
+  ior          = 1.525 +  9.5 / (w - 156.0)   ! index of refraction as function of wavelength w
+}
+
+Material Checker {
+  Reflection   = Texture("Checker1.BMP")      ! texture map
+  Specularity  = 0.3                          ! slightly mirrored
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.3                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+! -------------------------- the scene ---------------------------------------
+
+PolyMesh "Floor" {
+  singlesided, flat, Material Checker
+  Points 6
+    -1.0,  0.0, 0.0
+     2.5,  0.0, 0.0
+     2.5, -2.5, 0.0
+     0.5, -2.5, 0.0
+     0.5, -4.0, 0.0
+    -1.0, -4.0, 0.0
+  TexCoords2D 6
+     0.000000, 0.000
+     1.000000, 0.000
+     1.000000, 0.625
+     0.428571, 0.625
+     0.428571, 1.000
+     0.000000, 1.000
+  Faces 4
+   3  0,1,2  0,1,2
+   3  0,2,3  0,2,3
+   3  0,3,4  0,3,4
+   3  0,4,5  0,4,5
+}
+
+PARALLELOGRAM Light {
+  Material Light
+  BASE     =  0.95, -0.95,  2.4
+  EDGE1    =  0.60,  0.00,  0.0
+  EDGE2    =  0.00, -0.60,  0.0
+}
+
+PARALLELOGRAM light_side {
+  Material white
+  BASE     =  0.95, -0.95,  2.4
+  EDGE1    =  0.00, -0.60,  0.0
+  EDGE2    =  0.00,  0.00,  0.1
+}
+
+PARALLELOGRAM light_front {
+  Material white
+  BASE     =  0.95, -0.95,  2.4
+  EDGE1    =  0.00,  0.00,  0.1
+  EDGE2    =  0.60,  0.00,  0.0
+}
+
+PARALLELOGRAM Ceiling1 {
+  Material white
+  BASE     = -1.0,  0.0,  2.5
+  EDGE1    =  3.5,  0.0,  0.0
+  EDGE2    =  0.0, -2.5,  0.0
+}
+
+PARALLELOGRAM Ceiling2 {
+  Material white
+  BASE     = -1.0, -2.5,  2.5
+  EDGE1    =  1.5,  0.0,  0.0
+  EDGE2    =  0.0, -1.5,  0.0
+}
+
+PARALLELOGRAM front_back_wall {
+  Material white
+  BASE     =  0.5, -2.5,  0.0
+  EDGE1    =  0.0,  0.0,  2.5
+  EDGE2    =  2.0,  0.0,  0.0
+}
+
+PARALLELOGRAM back_back_wall {
+  Material white
+  BASE     = -1.0, -4.0,  0.0
+  EDGE1    =  0.0,  0.0,  2.5
+  EDGE2    =  1.5,  0.0,  0.0
+}
+
+PARALLELOGRAM front_wall {
+  Material white, VISIBLE = 0
+  BASE     = -1.0,  0.0,  0.0
+  EDGE1    =  3.5,  0.0,  0.0
+  EDGE2    =  0.0,  0.0,  2.5
+}
+
+PARALLELOGRAM right_wall {
+  Material green, visible = 0
+  BASE     = -1.0,  0.0,  0.0
+  EDGE1    =  0.0,  0.0,  2.5
+  EDGE2    =  0.0, -4.0,  0.0
+}
+
+PARALLELOGRAM left_wall {
+  Material red
+  BASE     =  2.5,  0.0,  0.0
+  EDGE1    =  0.0, -2.5,  0.0
+  EDGE2    =  0.0,  0.0,  2.5
+}
+
+PARALLELOGRAM middle_wall {
+  Material white
+  BASE     =  0.5, -2.5,  0.0
+  EDGE1    =  0.0, -1.5,  0.0
+  EDGE2    =  0.0,  0.0,  2.5
+}
+
+Cylinder horizontal_pipe {
+  Material = white
+  Stretch 0.15, 0.15, 1.5; Rotate_Y 90°; TRANSLATE 0.5, -3.75, 1.5
+}
+
+SPHERE WhiteBall {
+  Material = white
+  SCALE 0.15, TRANSLATE -0.6, -0.6, 0.15
+}
+
+SPHERE MirrorBall {
+  Material = Mirror
+  SCALE 0.45, TRANSLATE 0.576, -1.780, 0.45
+}
+
+SPHERE GlassBall {
+  Material = Glass
+  SCALE 0.45, TRANSLATE 1.77, -1.126, 1.126
+}
+
+Cylinder Stand {
+  Material = brass
+  Stretch 0.05, 0.05, 0.6; TRANSLATE 1.77, -1.126, 0.075
+}
+
+Torus Foot {
+  Material brass
+  START 0.0 STOP 1.570796326795 R1 0.05 R2 0.075
+  TRANSLATE 1.77, -1.126, 0.0
+}

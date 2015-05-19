@@ -30,9 +30,9 @@ def project_E_CAS(n):
 			print mi
 			f=lambda s: dia_trans(s,0.25,(i/3)/float(n),phi_CAS,mi)
 		y=[f(z) for z in m]
-		pyplot.plot(m,y)
+		# pyplot.plot(m,y)
 		# print y ,"y"
-		pyplot.show()
+		# pyplot.show()
 
 			# print f
 		E[i]=quad(f,[(i/3)/float(n),((i/3)+1)/float(n)])
@@ -41,7 +41,7 @@ def project_E_CAS(n):
 
 	return E
 
-print project_E_CAS(4)
+# print project_E_CAS(4)
 # m=linspace(0,1,250)
 # i=0
 # j=1

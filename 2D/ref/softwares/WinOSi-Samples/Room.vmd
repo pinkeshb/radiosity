@@ -1,0 +1,111 @@
+VMODEL VERSION 0.60
+
+OBJECT: Test Scene for WinOSI V0.3 - a room with two balls
+AUTHOR: Michael Granz
+DATE  : 27.07.1999
+UPDATE: 13.02.2002 ! file converted to new VModel 0.6 syntax and coordinate system
+
+Settings {
+  HitBuffers = 200
+
+  DiffShots  =   4
+  DiffDepth  =   2
+  SpecDepth  =   0
+
+  GlobalIOR  =   1.0
+
+  BACKGROUND  0.0, 0.0, 0.0     ! black
+  AMBIENT     0.3, 0.3, 0.3     ! some diffuse illumination
+}
+
+
+VIEW {
+  Camera = 5.299398, 4.188148, 10.119770
+  Target = 0.646791, 1.216684,  1.749716
+  Up     = 0.000000, 1.000000,  0.000000
+  FOVang = 0.349066
+}
+
+Material Beige {
+  Reflection   = RGB(0.7, 0.6, 0.5)           ! beige
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Concrete {
+  Reflection   = 0.6                          ! grey
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material White {
+  Reflection   = 0.95                         ! white
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.3                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+SPHERE Ball1 {
+  Material = White
+  SCALE 0.5, TRANSLATE -0.3, 0.5, 0.5
+}
+
+SPHERE Ball2 {
+  Material = White
+  SCALE 0.3, TRANSLATE 0.0, 0.3, -1.8
+}
+
+PARALLELOGRAM Ground {
+  Material Concrete
+  BASE  =  1.5,  0.0,  2.5
+  EDGE1 =  0.0,  0.0, -5.0
+  EDGE2 = -3.0,  0.0,  0.0
+}
+
+PARALLELOGRAM Ceiling {
+  Material Beige, VISIBLE 0
+  BASE  =  1.5,  2.0,  2.5
+  EDGE1 = -3.0,  0.0,  0.0
+  EDGE2 =  0.0,  0.0, -5.0
+}
+
+PARALLELOGRAM Wall1 {
+  Material Beige, VISIBLE 1
+  BASE  = -1.5,  0.0, -2.5
+  EDGE1 =  3.0,  0.0,  0.0
+  EDGE2 =  0.0,  2.0,  0.0
+}
+
+PARALLELOGRAM Wall2 {
+  Material Beige, VISIBLE 0
+  BASE  =  1.5,  0.0, -2.5
+  EDGE1 =  0.0,  0.0,  5.0
+  EDGE2 =  0.0,  2.0,  0.0
+}
+
+PARALLELOGRAM Wall3 {
+  Material Beige, VISIBLE 0
+  BASE  =  1.5,  0.0,  2.5
+  EDGE1 = -3.0,  0.0,  0.0
+  EDGE2 =  0.0,  2.0,  0.0
+}
+
+PARALLELOGRAM Wall4 {
+  Material Beige, VISIBLE 1
+  BASE  = -1.5,  0.0,  2.5
+  EDGE1 =  0.0,  0.0, -5.0
+  EDGE2 =  0.0,  2.0,  0.0
+}
+
+PARALLELOGRAM Light {
+  Material Light, VISIBLE 1
+  BASE  =  1.49,  1.3, -1.25
+  EDGE1 =  0.00,  0.0,  1.00
+  EDGE2 =  0.00,  0.5,  0.00
+}

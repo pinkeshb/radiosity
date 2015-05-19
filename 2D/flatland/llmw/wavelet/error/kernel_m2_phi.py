@@ -34,9 +34,9 @@ def thres_it(K_dwt,top_n):
                 K_dwt_thres[i,j]=0
     print "K_dwt_thres\n\n",K_dwt_thres
     return K_dwt_thres
-def project_kernel_m2_phi(n,top_n):
+def project_kernel_m2_phi(n,top_n,dist):
     # kernel
-    dist=1
+    # dist=1
     f1 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
     # f1 = lambda s, t:1
     # basis
@@ -69,7 +69,7 @@ def project_kernel_m2_phi(n,top_n):
                 # pyplot.show()
 
             # print f
-            K[i,j]=quad(f,[(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)])
+            K[i,j]=quad(f,[(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)],method='gauss-legendre')
             print [(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)]
             # K[i,j]=i*j
     K_dwt=dwt2(K)
@@ -98,7 +98,7 @@ def project_kernel_m2_phi(n,top_n):
 
 
             K_thres_error[i, j] = quad(f_error, [i / float(n), (i + 1) / float(n)],
-                           [j / float(n), (j + 1) / float(n)])
+                           [j / float(n), (j + 1) / float(n)],method='gauss-legendre')
 
 
     return K,K_dwt,K_dwt_thres,K_thres,K_thres_error

@@ -5,7 +5,7 @@ from matplotlib import pyplot
 
 def project_kernel_m2_phi(n):
     # kernel
-    dist=1
+    dist=0.25
     f1 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
     # basis
     # amplitude=pow(n,0.5)
@@ -42,7 +42,7 @@ def project_kernel_m2_phi(n):
 
             # print f
             K[i, j] = quad(f, [(i / 2) / float(n), ((i / 2) + 1) / float(n)],
-                           [(j / 2) / float(n), ((j / 2) + 1) / float(n)])
+                           [(j / 2) / float(n), ((j / 2) + 1) / float(n)],method='gauss-legendre')
             print[(i / 2) / float(n), ((i / 2) + 1) / float(n)
          ], [(j / 2) / float(n), ((j / 2) + 1) / float(n)]
             # K[i,j]=i*j
@@ -69,7 +69,7 @@ def project_kernel_m2_phi(n):
 
 
             K_error[i, j] = quad(f_error, [i / float(n), (i + 1) / float(n)],
-                           [j / float(n), (j + 1) / float(n)])
+                           [j / float(n), (j + 1) / float(n)],method='gauss-legendre')
             print [i / float(n), (i + 1) / float(n)]
             print [j / float(n), (j + 1) / float(n)]
 

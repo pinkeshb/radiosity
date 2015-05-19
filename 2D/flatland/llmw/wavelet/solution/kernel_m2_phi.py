@@ -1,9 +1,8 @@
 from mpmath import *
 from m2_phi import *
 from matplotlib import pyplot
-def project_kernel_m2_phi(n):
+def project_kernel_m2_phi(n,dist):
 	# kernel
-	dist=0.25
 	f1 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
 	# basis
 	# amplitude=pow(n,0.5)
@@ -35,7 +34,7 @@ def project_kernel_m2_phi(n):
 				# pyplot.show()
 
 			# print f
-			K[i,j]=quad(f,[(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)])
+			K[i,j]=quad(f,[(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)],method='gauss-legendre')
 			print [(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)]
 			# K[i,j]=i*j
 

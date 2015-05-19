@@ -1,0 +1,147 @@
+VMODEL VERSION 0.60
+
+OBJECT: Raytracing Test Scene - a room with some spheres
+AUTHOR: Michael Granz
+DATE  : 15.03.2000
+UPDATE: 05.07.2001 ! old WinOSi .scn scene file converted to new VModel 0.6 syntax
+
+! comments start with an exclamation mark and go till the end of line
+
+! Important note on comments:
+! comments are ignored by the parser while opening the file,
+! so when the file is saved again, all comments are lost !
+
+Settings {
+  HitBuffers = 300
+
+  DiffShots  =   4
+  DiffDepth  =   3
+  SpecDepth  =   5
+
+  GlobalIOR  =   1.0
+
+  BACKGROUND  0.0, 0.0, 0.0     ! black
+  AMBIENT     0.3, 0.3, 0.3     ! some diffuse illumination
+}
+
+! current active view:
+
+View {
+  Camera = 5.299398, -10.119770, 4.188148
+  Target = 0.646791,  -1.749716, 1.216684
+  Up     = 0.000000,   0.000000, 1.000000
+  FoVAng = 0.349066
+}
+
+! material definitions:
+
+Material Grey {
+  Reflection   = 0.8                          ! grey
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Red {
+  Reflection   = RGB(1.0, 0.2, 0.3)           ! reflection for red, green, blue light
+  Specularity  = 0.15, Exponent 20            ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Yellow {
+  Reflection   = RGB(1.0, 0.9, 0.1)           ! reflection for red, green, blue light
+  Specularity  = 0.15, Exponent 20            ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Pink {
+  Reflection   = RGB(0.9, 0.2, 1.0)           ! reflection for red, green, blue light
+  Specularity  = 0.15, Exponent 20            ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Floor {
+  Reflection   = Texture("Checker1.BMP")      ! texture map
+  Specularity  = 0.3                          ! mirrored
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Mirror {
+  Reflection   = 0.8                          ! white
+  Specularity  = 0.8                          ! Mirror
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Quarz {
+  Emission     = 0.0                          ! no light emission
+  Reflection   = frf(0)                       ! reflection by fresnel formula
+  Absorption   = RGB(0.35, 0.20, 0.30) / 0.4  ! 20%-30% absorption at 400mm depth
+  Specularity  = 1.0                          ! ideal mirror
+  ior          = 1.525 +  9.5 / (w - 156.0)   ! index of refraction as function of wavelength w
+}
+  
+Material Wall {
+  Reflection   = Texture("Brick1.BMP")        ! texture map
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.2                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Sphere Ball1  { Material = Mirror, Scale 0.5, Translate -0.3, -0.5 , 0.5 }
+Sphere Ball2  { Material = Pink,   SCALE 0.3, TRANSLATE  0.0,  1.8 , 0.3 }
+SPHERE Ball3  { Material = Quarz,  SCALE 0.4, TRANSLATE -0.6, -2.0 , 1.5 }
+SPHERE Ball4  { Material = Grey,   SCALE 0.4, TRANSLATE  1.0,  0.6 , 0.4 }
+SPHERE Ball5  { Material = Quarz,  SCALE 0.4, TRANSLATE -0.3,  1.0 , 1.4 }
+SPHERE Ball6  { Material = Red,    SCALE 0.3, TRANSLATE  1.0, -1.4 , 0.3 }
+SPHERE Ball7  { Material = Yellow, SCALE 0.2, TRANSLATE  0.6, -1.8 , 0.2 }
+SPHERE Light1 { Material = Light,  SCALE 0.2, TRANSLATE  1.0,  1.75, 1.2 }
+SPHERE Light2 { Material = Light,  SCALE 0.2, TRANSLATE  0.0, -1.6 , 1.7 }
+
+! Room
+
+PARALLELOGRAM Ground {
+  Material Floor
+  BASE  =  1.5, -2.5,  0.0
+  EDGE1 =  0.0,  5.0,  0.0
+  EDGE2 = -3.0,  0.0,  0.0
+}
+
+PARALLELOGRAM Ceiling {
+  Material Grey, VISIBLE 0
+  BASE  =  1.5, -2.5,  2.0
+  EDGE1 = -3.0,  0.0,  0.0
+  EDGE2 =  0.0,  5.0,  0.0
+}
+
+PARALLELOGRAM Wall1 {
+  Material Wall, VISIBLE 1
+  BASE  = -1.5,  2.5,  0.0
+  EDGE1 =  3.0,  0.0,  0.0
+  EDGE2 =  0.0,  0.0,  2.0
+}
+
+PARALLELOGRAM Wall2 {
+  Material Grey, VISIBLE 0
+  BASE  =  1.5,  2.5,  0.0
+  EDGE1 =  0.0, -5.0,  0.0
+  EDGE2 =  0.0,  0.0,  2.0
+}
+
+PARALLELOGRAM Wall3 {
+  Material Grey, VISIBLE 0
+  BASE  =  1.5, -2.5,  0.0
+  EDGE1 = -3.0,  0.0,  0.0
+  EDGE2 =  0.0,  0.0,  2.0
+}
+
+PARALLELOGRAM Wall4 {
+  Material Wall, VISIBLE 1
+  BASE  = -1.5, -2.5,  0.0
+  EDGE1 =  0.0,  5.0,  0.0
+  EDGE2 =  0.0,  0.0,  2.0
+}

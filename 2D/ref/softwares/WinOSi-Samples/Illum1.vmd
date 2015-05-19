@@ -1,0 +1,125 @@
+VMODEL VERSION 0.60
+
+OBJECT: This scene is a variation of the "Cornell Box" to test global illumination
+AUTHOR: Michael Granz
+DATE  : 21.06.2001
+UPDATE: 13.02.2002 ! file converted to new VModel 0.6 syntax and coordinate system
+
+Settings {
+  HitBuffers = 300
+
+  DiffShots  =   4
+  DiffDepth  =   3
+  SpecDepth  =   3
+
+  GlobalIOR  =   1.0
+
+  BACKGROUND  0.0, 0.0, 0.0     ! black
+  AMBIENT     0.3, 0.3, 0.3     ! some diffuse illumination
+}
+
+
+VIEW {
+  Camera = 280, 275, -800
+  Target = 280, 275,    0
+  Up     = 0.0, 1.0,  0.0
+  FOVang = 0.7
+}
+
+Material white {
+  Reflection   = 0.90                         ! white
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material blue {
+  Reflection   = RGB(0.10, 0.15, 0.95)        ! blue
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material red {
+  Reflection   = RGB(0.95, 0.10, 0.10)        ! red
+  Specularity  = 0.00                         ! ideal lambertian reflector
+  Transmission = 0.00                         ! no transparency (fully opaque)
+}
+
+Material Mirror {
+  Reflection   = 0.9                          ! white
+  Specularity  = 0.7                          ! Mirror
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Glass {
+  Emission     = 0.0                          ! no light emission
+  Reflection   = frf(0)                       ! reflection by fresnel formula
+  Absorption   = RGB(0.35, 0.20, 0.30) / 200  ! 20%-30% absorption at 200mm depth
+  Specularity  = 1.0                          ! ideal mirror
+  ior          = 1.525 +  9.5 / (w - 156.0)   ! index of refraction as function of wavelength w
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.3                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+PARALLELOGRAM Light {
+  Material Light
+  BASE     =  213.0,  548.0,  215.0
+  EDGE1    =  130.0,    0.0,    0.0
+  EDGE2    =    0.0,    0.0,  130.0
+}
+
+PARALLELOGRAM Floor {
+  Material white
+  BASE     =    0.0,    0.0,    0.0
+  EDGE1    =    0.0,    0.0,  560.0
+  EDGE2    =  560.0,    0.0,    0.0
+}
+
+PARALLELOGRAM Ceiling {
+  Material white
+  BASE     =    0.0,  550.0,    0.0
+  EDGE1    =  560.0,    0.0,    0.0
+  EDGE2    =    0.0,    0.0,  560.0
+}
+
+PARALLELOGRAM back_wall {
+  Material white
+  BASE     =    0.0,    0.0,  560.0
+  EDGE1    =    0.0,  550.0,    0.0
+  EDGE2    =  560.0,    0.0,    0.0
+}
+
+PARALLELOGRAM front_wall {
+  Material white, VISIBLE = 0
+  BASE     =    0.0,    0.0,    0.0
+  EDGE1    =  560.0,    0.0,    0.0
+  EDGE2    =    0.0,  550.0,    0.0
+}
+
+PARALLELOGRAM right_wall {
+  Material blue
+  BASE     =    0.0,    0.0,    0.0
+  EDGE1    =    0.0,  550.0,    0.0
+  EDGE2    =    0.0,    0.0,  560.0
+}
+
+PARALLELOGRAM left_wall {
+  Material red
+  BASE     =  560.0,    0.0,    0.0
+  EDGE1    =    0.0,    0.0,  560.0
+  EDGE2    =    0.0,  550.0,    0.0
+}
+
+SPHERE MirrorBall {
+  Material = Mirror
+  SCALE 100, TRANSLATE 150, 100, 395
+}
+
+SPHERE GlassBall {
+  Material = Glass
+  SCALE 100, TRANSLATE 415, 250, 250
+}

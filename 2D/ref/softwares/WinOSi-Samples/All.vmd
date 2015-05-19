@@ -1,0 +1,157 @@
+VMODEL VERSION 0.60
+
+OBJECT: Demonstration of all VModel features
+AUTHOR: Michael Granz
+DATE  : 21.09.2000
+UPDATE: 16.08.2001 ! file converted to new VModel 0.6 syntax and coordinate system
+
+! comments start with an exclamation mark and go till the end of line
+
+! Important note on comments:
+! comments are ignored by the parser while opening the file,
+! so when the file is saved again, all comments are lost !
+
+Settings {
+  HitBuffers = 300
+
+  DiffShots  =   4
+  DiffDepth  =   3
+  SpecDepth  =   2
+
+  GlobalIOR  =   1.0
+
+  BACKGROUND  0.3, 0.2, 0.1     ! dark brown
+  AMBIENT     0.3, 0.3, 0.3     ! some diffuse illumination
+}
+
+! current active view:
+
+VIEW {
+  Camera = 12.187003, -19.998121, 19.175213
+  Target =  3.028432,  -1.022878, -0.846766
+  UP     = -0.235325,   0.649414,  0.723107
+  FoVAng = 28.647890°
+}
+
+! named views:
+
+VIEW All {
+  Camera = 12.187003, 19.175213, 19.998121
+  Target =  3.028432, -0.846766,  1.022878
+  UP     = -0.235325,  0.723107, -0.649414
+  FoVAng = 28.647890°
+}
+
+VIEW House {
+  Camera =  6.131610,  6.870852, -11.797832
+  Target =  9.189893, -0.856279,   0.358500
+  UP     =  0.106320,  0.851045,   0.514216
+  FoVAng = 28.647890°
+}
+
+! material definitions:
+
+Material yellow {
+ !Reflection   = RGB(0.9, 0.7, 0.1)           ! reflection for red, green, blue light
+  Reflection   = Texture("Checker1.BMP")      ! texture map
+  Specularity  = 0.3, Exponent 15, Phong      ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material beige {
+  Reflection   = RGB(0.9, 0.8, 0.7)           ! reflection for red, green, blue light
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material white {
+  Reflection   = 0.9                          ! white reflection
+  Specularity  = 0.2, Exponent 5, Phong       ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material red {
+  Reflection   = RGB(0.7, 0.0, 0.0)           ! reflection for red, green, blue light
+  Specularity  = 0.2, Exponent 5, Phong       ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.2                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+SPHERE Light1 { Material = Light,  SCALE 0.2, TRANSLATE 5.0, -2.0, 6.0 }
+
+! scene geometry:
+
+Paraboloid "Paraboloid" {
+  Material yellow
+  Rotate_X 180°, Translate 0, 0, 1
+}
+
+Torus "Torus Sector" {
+  Material yellow
+  Angle 270° START 0.0 STOP 3.1415927 R1 1.25 R2 0.75
+  Rotate_Z 270°, TRANSLATE  2.5, 2.5, 0.0
+}
+
+Cylinder "Cone Sector" {
+  Material yellow
+  r_top = 0.25, angle = 270°
+  Stretch 2.0, 2.0, 1.0  Rotate_Z 90°, Translate -2.5, -2.5, 0.0
+}
+
+Sphere "Ellipsoid Sector" {
+  Material yellow
+  ANGLE 270° START 0.0
+  Stretch 2.0, 2.0, 1.0  Translate -2.5, 2.5, 0.0
+}
+
+Ring "Ring Sector" {
+  Material yellow
+  Ri 0.25, Angle 270°
+  Scale 2.0, Rotate_Z 180°, Translate 2.5, -2.5, 0.0
+}
+
+CUBE Baseplate {
+  Material beige
+  Stretch 17,11,1 Translate 3,0,-0.75
+}
+
+FUNCTION Hat {
+  Material yellow, Formula cos(x²+y²)/exp((x²+y²)/4)
+  Stepsize = 0.5, Min = -3, -3, -2, Max =  3,  3,  2
+  TRANSLATE 8, 0, 0.5
+}
+
+! multimaterial polygon mesh
+!POLYMESH SINGLESIDED FLAT House
+!  MATERIALS 2
+!    white
+!    red
+!  POINTS 10
+!    -100.0, -50.0,  150.0
+!     100.0, -50.0,  150.0
+!     100.0,  50.0,  150.0
+!       0.0, 100.0,  150.0
+!    -100.0,  50.0,  150.0
+!    -100.0, -50.0, -150.0
+!     100.0, -50.0, -150.0
+!     100.0,  50.0, -150.0
+!       0.0, 100.0, -150.0
+!    -100.0,  50.0, -150.0
+!  FACES 7
+!    ! [Materialindex] number_of_vertices   vertex1, vertex2, vertex3, [vertexN...]
+!    !                                    [ normal1, normal2, normal3, [normalN...] ]
+!    !                                    [ tcoord1, tcoord2, tcoord3, [tcoordN...] ]
+!    0, 5,  5 6 7 8 9
+!    0, 5,  4 3 2 1 0
+!    0, 4,  5 9 4 0
+!    0, 4,  7 6 1 2
+!    1, 4,  3 8 7 2
+!    1, 4,  3 4 9 8
+!    0, 4,  6 5 0 1
+!  SCALE 0.015, 0.015, 0.015  ROTATE 0,20,0  TRANSLATE 8.5, 0.75, -2.0

@@ -2,6 +2,7 @@ from kernel_haar_phi import *
 from mpmath import *
 import sys
 from wavedecs import *
+from save_read import *
 
 def thres(K_dwt, top_n):
     L = []
@@ -33,12 +34,15 @@ def thres(K_dwt, top_n):
             else:
                 K_dwt_thres[i, j] = 0
     return K_dwt_thres
-def main_fn(n,thres_converge,top_n):
+def main_fn(n,thres_converge,top_n,dist):
     fname=str(n)+'haar_wavelet'+".txt"
     fo = open(fname, "w")
 
 
-    K=project_kernel_haar_phi(n)
+    # K=project_kernel_haar_phi(n)
+    K=readit(n,"haar_scale_K_mat_dist_"+str(dist))
+
+    # K=readit(n)
     K_dwt=dwt2(K)
     K_dwt_thres = thres(K_dwt, top_n)
     E1 = matrix([[0] * n]).transpose()
@@ -121,9 +125,10 @@ def main_fn(n,thres_converge,top_n):
     return B1_proj, B2_proj
 
 if __name__ == "__main__":
-    top_n = 16
+    n=16
+    top_n = n*n
     thres_converge = 0.001
-    main_fn(4, thres_converge, top_n)
+    main_fn(n, thres_converge, top_n)
 
 
 

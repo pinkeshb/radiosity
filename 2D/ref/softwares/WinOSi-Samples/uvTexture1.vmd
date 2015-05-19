@@ -1,0 +1,74 @@
+VMODEL VERSION 0.60
+
+OBJECT: Demonstration of u/v Texture Mapping
+AUTHOR: Michael Granz
+DATE  : 31.10.2001
+
+Settings {
+  HitBuffers = 300
+
+  DiffShots  =   4
+  DiffDepth  =   3
+  SpecDepth  =   2
+
+  GlobalIOR  =   1.0
+
+  BACKGROUND  0.3, 0.2, 0.1     ! dark brown
+  AMBIENT     0.3, 0.3, 0.3     ! some diffuse illumination
+}
+
+! current active view:
+
+VIEW {
+  Camera =  1.692417, -3.483993, 2.219644
+  Target =  0.401198, -1.175259, 0.862782
+  UP     = -0.247897,  0.384067, 0.889404
+  FoVAng = 30°
+}
+
+! material definitions:
+
+Material yellow {
+ !Reflection   = RGB(0.9, 0.7, 0.1)           ! reflection for red, green, blue light
+  Reflection   = Texture("Checker2.BMP")      ! texture map
+  Specularity  = 0.3, Exponent 15, Phong      ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.2                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+SPHERE Light1 { Material = Light,  SCALE 0.2, TRANSLATE 5.0, -2.0, 6.0 }
+
+! scene geometry:
+
+Torus "Torus Sector" {
+  Material yellow
+  TexCoords2D 0.389,0.389 1,0.389 0.389,1 1,1
+  Angle 90° START 0.0 STOP 1.5707963 R1 0.5 R2 0.5
+  Rotate_Z 270°, TRANSLATE 0,0,0.5
+}
+
+Cylinder "Cyl1" {
+  Material yellow
+  TexCoords2D 0.389,0 1,0 0.389,0.389 1,0.389
+  angle = 90°; Stretch 1,1,0.5; Rotate_Z 270°
+}
+
+Cylinder "Cyl2" {
+  Material yellow
+  TexCoords2D 0.389,0.389 0.389,1 0,0.389 0,1
+  angle = 90°; Stretch 0.5,0.5,1; Rotate_Z 270°; Rotate_Y 90°; Translate 0,-0.5,0.5
+}
+
+Parallelogram "Plate" {
+  Material yellow
+  TexCoords2D 0,0 0.389,0 0,0.389 0.389,0.389
+  base  = -1, -1, 0.0
+  edge1 =  1,  0, 0.0
+  edge2 =  0,  0, 0.5
+}

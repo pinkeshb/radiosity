@@ -1,0 +1,204 @@
+VMODEL VERSION 0.60
+OBJECT: Test Scene for WinOSI
+AUTHOR: Michael Granz
+
+Settings {
+  HitBuffers = 1000
+  DiffShots  =   4
+  DiffDepth  =   3
+  SpecDepth  =   2
+  GlobalIOR  =   1.0
+  BACKGROUND  0.0, 0.0, 0.0     ! black
+  AMBIENT     0.3, 0.3, 0.3     ! some diffuse illumination
+}
+
+VIEW {
+  Camera = 0, 60, 90
+  Target = 0, 0,  0
+  Up     = 0.000000, 1.000000,  0.000000
+  FOVang = 0.149066
+}
+
+Material Glass {
+Emission     = 0.0                          ! no light emission
+Reflection   = frf(0)                       ! reflection by fresnel formula
+Absorption   = RGB(0, 0, 0) / 50  ! 20%-30% absorption at 50cm depth
+Specularity  = 0.99                          ! ideal mirror - purely specular
+ior = 1.4
+}
+Material Beige {
+Reflection   = RGB(0.7, 0.6, 0.5)           ! beige
+Specularity  = 0.0                          ! ideal lambertian reflector
+Transmission = 0.0                          ! no transparency (fully opaque)
+}
+Material Concrete {
+Reflection   = 0.6                          ! grey
+Specularity  = 0.0                          ! ideal lambertian reflector
+Transmission = 0.0                          ! no transparency (fully opaque)
+}
+Material White {
+Reflection   = 0.95                         ! white
+Specularity  = 0.0                          ! ideal lambertian reflector
+Transmission = 0.0                          ! no transparency (fully opaque)
+}
+Material Light {
+Emission     = 0.6                          ! perfect white light
+Reflection   = 0.8                          ! colour grey
+Specularity  = 0.3                          ! shiny surface
+Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+SPHERE Light {
+  Material Light, VISIBLE 1
+  SCALE 5, TRANSLATE 0,8,0
+}
+
+PARALLELOGRAM Ground {
+  Material Concrete
+  BASE  =  50.0,  0.0,  50.0
+  EDGE1 =  0.0,  0.0, -100.0
+  EDGE2 = -100.0,  0.0,  0.0
+}
+
+PARALLELOGRAM Ceiling {
+  Material Concrete
+  BASE  =  -50.0,  20.0,  -50.0
+  EDGE1 =  100,  0.0, 0.0
+  EDGE2 = 0.0,  0.0,  100
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 0.0,1.2,10.0
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 3.42152165642,1.2,9.39644558089
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 6.43002840968,1.2,7.65863791093
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 8.66236075061,1.2,4.99634928987
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 9.84905186934,1.2,1.73094693014
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 9.84685523213,1.2,-1.74339956337
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 8.65603599697,1.2,-5.00729875473
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 6.42033900623,1.2,-7.66676248785
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE 3.40963721961,1.2,-9.40076454501
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -0.0126448893038,1.2,-9.99999200534
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -3.43340062245,1.2,-9.39211159249
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -6.43970753195,1.2,-7.65050108836
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -8.66867165371,1.2,-4.98539183617
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -9.85123275859,1.2,-1.71849152924
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -9.84464285045,1.2,1.75584940902
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -8.64969740291,1.2,5.01824021326
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -6.41063933708,1.2,7.67487480613
+}
+
+SPHERE {
+Material = Beige
+SCALE 1.2, TRANSLATE -3.39774733101,1.2,9.40506847793
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE 0.0,1.5,6.0
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE 3.85801704581,1.5,4.59518274656
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE 5.90943112161,1.5,1.03856815808
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE 5.19362159818,1.5,-3.00437925284
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE 2.04578233176,1.5,-5.640458727
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE -2.06004037347,1.5,-5.63526695549
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE -5.20120299223,1.5,-2.9912351017
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE -5.90678571027,1.5,1.05350964541
+}
+
+SPHERE {
+Material = Glass
+SCALE 1.5, TRANSLATE -3.84638360225,1.5,4.60492488368
+}
+

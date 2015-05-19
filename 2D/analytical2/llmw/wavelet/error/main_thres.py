@@ -28,7 +28,7 @@ def K_Error(K,n):
 
 
             K_error[i, j] = quad(f_error, [i / float(n), (i + 1) / float(n)],
-                           [j / float(n), (j + 1) / float(n)])
+                           [j / float(n), (j + 1) / float(n)],method='gauss-legendre')
             print [i / float(n), (i + 1) / float(n)]
             print [j / float(n), (j + 1) / float(n)]
     return K_error
@@ -73,7 +73,7 @@ def B_Error(B,n):
         print i,"afdjahdf"
         b_error=lambda s:(b(s)-B[2*i]*dia_trans(s, a, i  / float(n), phi_1_m2)-B[2*i+1]*dia_trans(s, a, i  / float(n), phi_2_m2))*\
                         (b(s)-B[2*i]*dia_trans(s, a, i/ float(n), phi_1_m2)-B[2*i+1]*dia_trans(s, a, i/ float(n), phi_2_m2))
-        B_error[i]=quad(b_error,[i / float(n), (i + 1) / float(n)])
+        B_error[i]=quad(b_error,[i / float(n), (i + 1) / float(n)],method='gauss-legendre')
         print B_error[i]
 
         print i,"afdjahdf"

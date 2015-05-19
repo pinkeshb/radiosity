@@ -1,0 +1,572 @@
+VMODEL VERSION 0.60
+OBJECT: Cornell Box
+AUTHOR: Michael Granz
+DATE  : 07.07.1999
+
+Settings {
+  HitBuffers = 500
+  DiffShots  =   7
+  DiffDepth  =   2
+  SpecDepth  =   7
+  GlobalIOR  = 1.0
+  BACKGROUND   0.0, 0.0, 0.0     ! black
+  AMBIENT      0, 0, 0           ! no diffuse illumination
+}
+
+View {
+  Camera = 280, 800,  275
+  Target = 280,   0,  275
+  Up     = 0.0, 0.0,  1.0
+  FOVang = 0.7
+}
+
+Material Glass {
+Emission     = 0.0                          ! no light emission
+Reflection   = frf(0)                       ! reflection by fresnel formula
+Absorption   = RGB(0, 0, 0) / 50            ! 20%-30% absorption at 50cm depth
+Specularity  = 0.99                         ! ideal mirror - purely specular
+ior = 1.400 + 250.0 / (w - 230.0)           ! index of refraction dependent from wavelength
+}
+Material grey {
+Reflection   = 0.85                         ! grey
+Specularity  = 0.00                         ! ideal lambertian reflector
+Transmission = 0.00                         ! no transparency (fully opaque)
+}
+Material white {
+Reflection   = 0.95                         ! white
+Specularity  = 0.00                         ! ideal lambertian reflector
+Transmission = 0.00                         ! no transparency (fully opaque)
+}
+Material yellow {
+Reflection   = RGB(0.75, 0.65, 0.35)        ! yellow
+Specularity  = 0.00                         ! ideal lambertian reflector
+Transmission = 0.00                         ! no transparency (fully opaque)
+}
+Material green {
+Reflection   = RGB(0.15, 0.65, 0.15)        ! green
+Specularity  = 0.00                         ! ideal lambertian reflector
+Transmission = 0.00                         ! no transparency (fully opaque)
+}
+Material blue {
+Reflection   = RGB(0.15, 0.15, 0.65)        ! green
+Specularity  = 0.00                         ! ideal lambertian reflector
+Transmission = 0.00                         ! no transparency (fully opaque)
+}
+Material red {
+Reflection   = RGB(0.75, 0.15, 0.15)        ! red
+Specularity  = 0.00                         ! ideal lambertian reflector
+Transmission = 0.00                         ! no transparency (fully opaque)
+}
+Material Light {
+Emission     = 1.0                          ! perfect white light
+Reflection   = 0.8                          ! colour grey
+Specularity  = 0.3                          ! shiny surface
+Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+PARALLELOGRAM Light1 {
+Material Light
+BASE     =  208.0.0, -208.0.0,  548.0
+EDGE1    =  20.0,    0.0,    0.0
+EDGE2    =    0.0, -20.0,    0.0
+}
+PARALLELOGRAM Light2 {
+Material Light
+BASE     =  208.0.0, -320.0.0,  548.0
+EDGE1    =  20.0,    0.0,    0.0
+EDGE2    =    0.0, -20.0,    0.0
+}
+PARALLELOGRAM Light3 {
+Material Light
+BASE     =  320.0.0, -208.0.0,  548.0
+EDGE1    =  20.0,    0.0,    0.0
+EDGE2    =    0.0, -20.0,    0.0
+}
+PARALLELOGRAM Light4 {
+Material Light
+BASE     =  320.0.0, -320.0.0,  548.0
+EDGE1    =  20.0,    0.0,    0.0
+EDGE2    =    0.0, -20.0,    0.0
+}
+
+PARALLELOGRAM Floor {
+Material green
+BASE     =    0.0,    0.0,    0.0
+EDGE1    =    0.0, -560.0,    0.0
+EDGE2    =  560.0,    0.0,    0.0
+}
+PARALLELOGRAM Ceiling {
+Material grey
+BASE     =    0.0,    0.0,  550.0
+EDGE1    =  560.0,    0.0,    0.0
+EDGE2    =    0.0, -560.0,    0.0
+}
+PARALLELOGRAM back_wall {
+Material grey
+BASE     =    0.0, -560.0,    0.0
+EDGE1    =    0.0,    0.0,  550.0
+EDGE2    =  560.0,    0.0,    0.0
+}
+PARALLELOGRAM right_wall {
+Material blue
+BASE     =    0.0,    0.0,    0.0
+EDGE1    =    0.0,    0.0,  550.0
+EDGE2    =    0.0, -560.0,    0.0
+}
+PARALLELOGRAM left_wall {
+Material red
+BASE     =  560.0,    0.0,    0.0
+EDGE1    =    0.0, -560.0,    0.0
+EDGE2    =    0.0,    0.0,  550.0
+}
+
+SPHERE GlassBall01 {
+Material = white SCALE 38.8235294118, 
+Translate 280.0,-500.0,50
+}
+
+SPHERE GlassBall02 {
+Material = white SCALE 38.8020184388, 
+Translate 396.323712099,-93.4117505418,54
+}
+
+SPHERE GlassBall03 {
+Material = white SCALE 38.7375904034, 
+Translate 82.9035330277,-376.638218474,58
+}
+
+SPHERE GlassBall04 {
+Material = white SCALE 38.6305594452, 
+Translate 497.777622198,-302.202805099,62
+}
+
+SPHERE GlassBall05 {
+Material = white SCALE 38.4814474279, 
+Translate 107.608329875,-146.46369294,66
+}
+
+SPHERE GlassBall06 {
+Material = white SCALE 38.2909813949, 
+Translate 355.271232631,-483.508055773,70
+}
+
+SPHERE GlassBall07 {
+Material = white SCALE 38.0600900245, 
+Translate 323.524244695,-68.7635285236,74
+}
+
+SPHERE GlassBall08 {
+Material = white SCALE 37.7898991015, 
+Translate 132.368956332,-435.119944819,78
+}
+
+SPHERE GlassBall09 {
+Material = white SCALE 37.4817260284, 
+Translate 485.652859019,-226.904308221,82
+}
+
+SPHERE GlassBall10 {
+Material = white SCALE 37.1370734019, 
+Translate 79.2566832221,-216.845015374,86
+}
+
+SPHERE GlassBall11 {
+Material = white SCALE 36.7576216861, 
+Translate 415.539965601,-438.161216927,90
+}
+
+SPHERE GlassBall12 {
+Material = white SCALE 36.3452210197, 
+Translate 249.005838149,-76.3892442617,94
+}
+
+SPHERE GlassBall13 {
+Material = white SCALE 35.9018821942, 
+Translate 199.577036612,-466.873239737,98
+}
+
+SPHERE GlassBall14 {
+Material = white SCALE 35.4297668503, 
+Translate 444.912203026,-165.492237435,102
+}
+
+SPHERE GlassBall15 {
+Material = white SCALE 34.9311769376, 
+Translate 82.2987503597,-289.786733341,106
+}
+
+SPHERE GlassBall16 {
+Material = white SCALE 34.4085434911, 
+Translate 450.358955914,-374.845704111,110
+}
+
+SPHERE GlassBall17 {
+Material = white SCALE 33.8644147776, 
+Translate 187.103195517,-112.085853469,114
+}
+
+SPHERE GlassBall18 {
+Material = white SCALE 33.3014438711, 
+Translate 270.165510651,-468.451746473,118
+}
+
+SPHERE GlassBall19 {
+Material = white SCALE 32.7223757167, 
+Translate 386.164796848,-127.973250761,122
+}
+
+SPHERE GlassBall20 {
+Material = white SCALE 32.1300337469, 
+Translate 112.567631648,-351.525915328,126
+}
+
+SPHERE GlassBall21 {
+Material = white SCALE 31.5273061148, 
+Translate 456.54757404,-307.358148944,130
+}
+
+SPHERE GlassBall22 {
+Material = white SCALE 30.9171316122, 
+Translate 147.274894899,-165.640640901,134
+}
+
+SPHERE GlassBall23 {
+Material = white SCALE 30.3024853404, 
+Translate 331.093606963,-443.936481091,138
+}
+
+SPHERE GlassBall24 {
+Material = white SCALE 29.6863642043, 
+Translate 322.488719873,-117.231465764,142
+}
+
+SPHERE GlassBall25 {
+Material = white SCALE 29.0717723001, 
+Translate 160.362703926,-393.252810857,146
+}
+
+SPHERE GlassBall26 {
+Material = white SCALE 28.4617062676, 
+Translate 438.051229616,-247.875000231,150
+}
+
+SPHERE GlassBall27 {
+Material = white SCALE 27.8591406793, 
+Translate 132.081948006,-224.839309536,154
+}
+
+SPHERE GlassBall28 {
+Material = white SCALE 27.2670135369, 
+Translate 374.29332689,-402.405307802,158
+}
+
+SPHERE GlassBall29 {
+Material = white SCALE 26.688211946, 
+Translate 265.063716801,-129.506184389,162
+}
+
+SPHERE GlassBall30 {
+Material = white SCALE 26.1255580393, 
+Translate 214.469373923,-412.751679488,166
+}
+
+SPHERE GlassBall31 {
+Material = white SCALE 25.5817952164, 
+Translate 403.220623785,-203.638386531,170
+}
+
+SPHERE GlassBall32 {
+Material = white SCALE 25.0595747672, 
+Translate 137.996251491,-279.61997454,174
+}
+
+SPHERE GlassBall33 {
+Material = white SCALE 24.5614429448, 
+Translate 397.911759005,-353.948021069,178
+}
+
+SPHERE GlassBall34 {
+Material = white SCALE 24.0898285507, 
+Translate 220.23161187,-157.270807753,182
+}
+
+SPHERE GlassBall35 {
+Material = white SCALE 23.6470310919, 
+Translate 266.052229122,-413.271968442,186
+}
+
+SPHERE GlassBall36 {
+Material = white SCALE 23.2352095695, 
+Translate 360.907883385,-176.125559674,190
+}
+
+SPHERE GlassBall37 {
+Material = white SCALE 22.8563719513, 
+Translate 158.4036574,-324.605101481,194
+}
+
+SPHERE GlassBall38 {
+Material = white SCALE 22.5123653816, 
+Translate 404.876042298,-306.078668415,198
+}
+
+SPHERE GlassBall39 {
+Material = white SCALE 22.2048671745, 
+Translate 189.085953148,-193.010252681,202
+}
+
+SPHERE GlassBall40 {
+Material = white SCALE 21.9353766363, 
+Translate 310.750918282,-400.436652527,206
+}
+
+SPHERE GlassBall41 {
+Material = white SCALE 21.7052077544, 
+Translate 317.225540551,-162.772363519,210
+}
+
+SPHERE GlassBall42 {
+Material = white SCALE 21.515482791, 
+Translate 187.210890578,-359.08810451,214
+}
+
+SPHERE GlassBall43 {
+Material = white SCALE 21.3671268109, 
+Translate 399.749816819,-262.099132233,218
+}
+
+SPHERE GlassBall44 {
+Material = white SCALE 21.2608631713, 
+Translate 169.462722977,-232.078053043,222
+}
+
+SPHERE GlassBall45 {
+Material = white SCALE 21.1972099946, 
+Translate 348.244350249,-378.848004854,226
+}
+
+SPHERE GlassBall46 {
+Material = white SCALE 21.1764776424, 
+Translate 274.387713798,-160.13127248,230
+}
+
+SPHERE GlassBall47 {
+Material = white SCALE 21.1987672017, 
+Translate 221.285818463,-384.79973399,234
+}
+
+SPHERE GlassBall48 {
+Material = white SCALE 21.2639699928, 
+Translate 385.591517455,-221.951085462,238
+}
+
+SPHERE GlassBall49 {
+Material = white SCALE 21.3717680985, 
+Translate 159.075209435,-273.364911873,242
+}
+
+SPHERE GlassBall50 {
+Material = white SCALE 21.5216359146, 
+Translate 379.801373568,-350.092341712,246
+}
+
+SPHERE GlassBall51 {
+Material = white SCALE 21.7128427125, 
+Translate 231.967171356,-166.723560837,250
+}
+
+SPHERE GlassBall52 {
+Material = white SCALE 21.9444562022, 
+Translate 260.628677284,-402.833836892,254
+}
+
+SPHERE GlassBall53 {
+Material = white SCALE 22.2153470779, 
+Translate 362.42726151,-184.851300777,258
+}
+
+SPHERE GlassBall54 {
+Material = white SCALE 22.5241945243, 
+Translate 158.04288135,-317.652238915,262
+}
+
+SPHERE GlassBall55 {
+Material = white SCALE 22.8694926567, 
+Translate 405.303995972,-313.067498336,266
+}
+
+SPHERE GlassBall56 {
+Material = white SCALE 23.2495578632, 
+Translate 189.684743025,-184.080467683,270
+}
+
+SPHERE GlassBall57 {
+Material = white SCALE 23.6625370143, 
+Translate 306.356386787,-411.471878289,274
+}
+
+SPHERE GlassBall58 {
+Material = white SCALE 24.1064164976, 
+Translate 328.072709716,-152.135221751,278
+}
+
+SPHERE GlassBall59 {
+Material = white SCALE 24.5790320364, 
+Translate 169.434331867,-364.702305526,282
+}
+
+SPHERE GlassBall60 {
+Material = white SCALE 25.0780792422, 
+Translate 421.451392197,-266.343338171,286
+}
+
+SPHERE GlassBall61 {
+Material = white SCALE 25.6011248504, 
+Translate 150.085436159,-215.436904702,290
+}
+
+SPHERE GlassBall62 {
+Material = white SCALE 26.1456185845, 
+Translate 357.707320351,-406.144817809,294
+}
+
+SPHERE GlassBall63 {
+Material = white SCALE 26.7089055906, 
+Translate 280.81007183,-128.651702872,298
+}
+
+SPHERE GlassBall64 {
+Material = white SCALE 27.2882393825, 
+Translate 197.492026484,-410.781914839,302
+}
+
+SPHERE GlassBall65 {
+Material = white SCALE 27.8807952326, 
+Translate 422.227444123,-211.206360182,306
+}
+
+SPHERE GlassBall66 {
+Material = white SCALE 28.4836839448, 
+Translate 119.514743893,-262.769872285,310
+}
+
+SPHERE GlassBall67 {
+Material = white SCALE 29.093965942, 
+Translate 409.794788913,-381.656515238,314
+}
+
+SPHERE GlassBall68 {
+Material = white SCALE 29.7086655986, 
+Translate 222.445555951,-121.794730984,318
+}
+
+SPHERE GlassBall69 {
+Material = white SCALE 30.3247857495, 
+Translate 244.42126995,-448.116909058,322
+}
+
+SPHERE GlassBall70 {
+Material = white SCALE 30.9393223034, 
+Translate 401.546402925,-153.649038832,326
+}
+
+SPHERE GlassBall71 {
+Material = white SCALE 31.5492788903, 
+Translate 106.660270316,-323.764795067,330
+}
+
+SPHERE GlassBall72 {
+Material = white SCALE 32.1516814714, 
+Translate 453.499796933,-335.606288387,334
+}
+
+SPHERE GlassBall73 {
+Material = white SCALE 32.7435928397, 
+Translate 160.017166317,-138.466193039,338
+}
+
+SPHERE GlassBall74 {
+Material = white SCALE 33.3221269416, 
+Translate 307.416607979,-466.824398851,342
+}
+
+SPHERE GlassBall75 {
+Material = white SCALE 33.8844629488, 
+Translate 356.846698947,-104.036434509,346
+}
+
+SPHERE GlassBall76 {
+Material = white SCALE 34.4278590117, 
+Translate 119.158047933,-390.410340044,350
+}
+
+SPHERE GlassBall77 {
+Material = white SCALE 34.9496656286, 
+Translate 477.855466636,-271.266941721,354
+}
+
+SPHERE GlassBall78 {
+Material = white SCALE 35.4473385642, 
+Translate 105.023382957,-181.352962056,358
+}
+
+SPHERE GlassBall79 {
+Material = white SCALE 35.9184512545, 
+Translate 377.57678507,-458.623749431,362
+}
+
+SPHERE GlassBall80 {
+Material = white SCALE 36.3607066385, 
+Translate 291.839097474,-74.2964087025,366
+}
+
+SPHERE GlassBall81 {
+Material = white SCALE 36.7719483584, 
+Translate 159.784048527,-450.199896486,370
+}
+
+SPHERE GlassBall82 {
+Material = white SCALE 37.1501712733, 
+Translate 474.032605897,-198.335911028,374
+}
+
+SPHERE GlassBall83 {
+Material = white SCALE 37.4935312362, 
+Translate 70.2197221755,-246.341309592,378
+}
+
+SPHERE GlassBall84 {
+Material = white SCALE 37.8003540855, 
+Translate 441.523622336,-420.686243142,382
+}
+
+SPHERE GlassBall85 {
+Material = white SCALE 38.0691438081, 
+Translate 216.914125787,-73.7052786415,386
+}
+
+SPHERE GlassBall86 {
+Material = white SCALE 38.2985898335, 
+Translate 224.06186357,-489.6924513,390
+}
+
+SPHERE GlassBall87 {
+Material = white SCALE 38.487573424, 
+Translate 439.185787597,-130.916603772,394
+}
+
+SPHERE GlassBall88 {
+Material = white SCALE 38.6351731297, 
+Translate 65.2239735586,-322.45895324,398
+}
+
+SPHERE GlassBall89 {
+Material = white SCALE 38.7406692807, 
+Translate 485.280007516,-357.805790633,402
+}
+
+SPHERE GlassBall90 {
+Material = white SCALE 38.8035474969, 
+Translate 146.745909922,-105.089912457,406
+}
+

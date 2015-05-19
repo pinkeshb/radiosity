@@ -12,6 +12,7 @@ def project_kernel_CAS(n):
 	# f = lambda s,t: f1(s,t)*f2(s)*f3(t)
 	# f = lambda s,t: f1(s,t)*f3(t)*f2(s)
 	# m=linspace(0,1,250)
+	a=1.0/n
 	K=matrix(n*3,n*3)
 	for i in range(0,n*3):
 		for j in range(0,n*3):

@@ -1,7 +1,8 @@
 import Image
 from mpmath import *
 from main_thres import *
-B1,B2=main_fn(4,0.001,16) 
+n=256
+B1,B2=main_fn(n,0.001,n*n,0.25) 
 # B1=matrix(1,4)
 # print B1
 # print B1[1]

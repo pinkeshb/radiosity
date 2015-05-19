@@ -1,0 +1,318 @@
+VMODEL VERSION 0.63
+
+OBJECT: Prism Test Scene
+AUTHOR: Michael Granz
+DATE  : 12/15/1999
+UPDATE: 08/13/2001 converted to new syntax
+UPDATE: 10/24/2001 converted to new coordinate system
+UPDATE: 10/29/2001 commented out some lenses for rendering speed
+UPDATE: 04/22/2002 added some ray definitions for VModel
+UPDATE: 04/28/2003 converted the prism to a polymesh to make it doublesided
+
+Settings {
+  HitBuffers      = 300
+
+  SpecLightDepth  =  10
+  SpecViewDepth   =   6
+  DiffDepth       =   2
+
+  GlobalIOR = 1.0
+
+  BACKGROUND  0.0, 0.0, 0.0     ! black
+  AMBIENT     0.3, 0.3, 0.3     ! some diffuse illumination (not for WinOSi!)
+}
+
+
+VIEW {
+  Camera =  4.188186,  8.446301, 2.717797
+  Target = -1.568488, -0.937698, 0.698738
+  Up     = -0.094328, -0.153764, 0.983595
+  FOVang = 16.562261°
+}
+
+VIEW View1 {
+  Camera =  1.775991,  9.388145, 3.478806
+  Target = -1.629133, -0.883564, 0.620050
+  Up     = -0.077399, -0.243423, 0.966827
+  FOVang =  0.349066
+}
+
+Material Lens {
+  Emission     = 0.0                          ! no light emission
+  Reflection   = fresnel(0)                   ! reflection by fresnel formula
+  Specularity  = 1.0                          ! ideal mirror
+  ior          = 1.6                          ! index of refraction independent from wavelength
+}
+
+Material Special {
+  Emission     = 0.0                          ! no light emission
+  Reflection   = fresnel(0)                   ! reflection by fresnel formula
+  Specularity  = 1.0                          ! ideal mirror
+  ior = 1.400 + 50.0 / (w - 230.0)            ! index of refraction dependent from wavelength
+}
+
+Material Grey {
+  Reflection   = 0.8                          ! grey
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Gold {
+  Reflection   = RGB(0.9, 0.6, 0.3)           ! gold
+  Specularity  = 0.5                          ! dirty mirror
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Black {
+  Reflection   = 0.0                          ! no reflection - pure absorber
+  Specularity  = 0.0                          ! ideal black radiator
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Red {
+  Reflection   = RGB(1.0, 0.2, 0.3)           ! reflection for red, green, blue light
+  Specularity  = 0.15, Exponent 20            ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light1 {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.2                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light2 {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.2                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+! Room
+
+PARALLELOGRAM Ground {
+  Material Grey
+  BASE  =  0.7, -4.5,  0.0
+  EDGE1 =  0.0,  5.0,  0.0
+  EDGE2 = -3.0,  0.0,  0.0
+  ROTATE_Z -0.78539
+}
+
+PARALLELOGRAM Ceiling {
+  Material Grey, VISIBLE 0
+  BASE  =  0.7, -4.5,  2.0
+  EDGE1 = -3.0,  0.0,  0.0
+  EDGE2 =  0.0,  5.0,  0.0
+  ROTATE_Z -0.78539
+}
+
+PARALLELOGRAM Wall1 {
+  Material Grey
+  BASE  =  0.7, -4.5,  0.0
+  EDGE1 = -3.0,  0.0,  0.0
+  EDGE2 =  0.0,  0.0,  2.0
+  ROTATE_Z -0.78539
+}
+
+PARALLELOGRAM Wall2 {
+  Material Grey, VISIBLE 1
+  BASE  =  0.7,  0.5,  0.0
+  EDGE1 =  0.0, -5.0,  0.0
+  EDGE2 =  0.0,  0.0,  2.0
+  ROTATE_Z -0.78539
+}
+
+PARALLELOGRAM Wall3 {
+  Material Grey, VISIBLE 0
+  BASE  =  0.7,  0.5,  0.0
+  EDGE1 =  0.0,  0.0,  2.0
+  EDGE2 = -3.0,  0.0,  0.0
+  ROTATE_Z -0.78539
+}
+
+PARALLELOGRAM Wall4 {
+  Material Grey, VISIBLE 0
+  BASE  = -2.3, -4.5,  0.0
+  EDGE1 =  0.0,  5.0,  0.0
+  EDGE2 =  0.0,  0.0,  2.0
+  ROTATE_Z -0.78539
+}
+
+! Prism
+
+PolyMesh "Prism" {
+  doublesided, flat, Material "Special"
+  Points 6
+    0.000000, -0.400000, 0.000000
+    0.346400,  0.200000, 0.000000
+   -0.346400,  0.200000, 0.000000
+   -0.346400,  0.200000, 1.000000
+    0.346400,  0.200000, 1.000000
+    0.000000, -0.400000, 1.000000
+  Faces 5
+    ! Caps
+    3 0,1,2
+    3 5,3,4
+    ! Sides
+    4 3,2,1,4
+    4 5,0,2,3
+    4 4,1,0,5
+  Rotate_Z -0.55; Translate -1.0, -0.17, 0.01
+}
+
+! Lens 1
+
+PARABOLOID In1 {
+  Material = Lens, Height = 0.03
+  ROTATE_Y  1.5707963 SCALE 1.5 TRANSLATE  0.3, 0.0, 0.0
+  TRANSLATE -0.3875, 0.0, 0.65
+}
+
+PARABOLOID Out1 {
+  Material = Lens, Height = 0.03
+  ROTATE_Y -1.5707963 SCALE 1.5 TRANSLATE  0.2, 0.0, 0.0
+  TRANSLATE -0.3875, 0.0, 0.65
+}
+
+CYLINDER Hull1 {
+  Material = Lens
+  Stretch 0.2598, 0.2598, 0.01 Rotate_Y 1.5707963 Translate -0.1325,0,0.65
+}
+
+CYLINDER Stand1a {
+  Material = Gold
+  Stretch 0.03, 0.03, 0.378232 Translate -0.1375,0,0
+}
+
+SPHERE Stand1b {
+  Material = Gold
+  Start=0; Scale 0.03; Translate -0.1375,0,0.378232
+}
+
+! Lens 2
+
+!PARABOLOID In2 {
+!  Material = Lens, Height = 0.02
+!  ROTATE_Y  1.5707963 SCALE 1.5 TRANSLATE  0.3, 0.0, 0.0
+!  Scale 1.5, Rotate_Z 0.8
+!  TRANSLATE -1.85, -0.8, 0.65
+!}
+!
+!PARABOLOID Out2 {
+!  Material = Lens, Height = 0.02
+!  ROTATE_Y -1.5707963 SCALE 1.5 TRANSLATE  0.22, 0.0, 0.0
+!  Scale 1.5, Rotate_Z 0.8
+!  TRANSLATE -1.85, -0.8, 0.65
+!}
+!
+!CYLINDER Hull2 {
+!  Material = Lens
+!  Stretch 0.21213, 0.21213, 0.02 Rotate_Y 1.5707963 Translate 0.27,0,0
+!  Scale 1.5, Rotate_Z 0.8
+!  TRANSLATE -1.85, -0.8, 0.65
+!}
+!
+!CYLINDER Stand2a {
+!  Material = Gold
+!  Stretch 0.02, 0.02, 0.21 Translate 0.26,0,0
+!  Scale 1.5, Rotate_Z 0.8
+!  TRANSLATE -1.85, -0.8, 0.0
+!}
+!
+!SPHERE Stand2b {
+!  Material = Gold
+!  Start=0; Scale 0.02; Translate 0.26,0,0.21
+!  Scale 1.5, Rotate_Z 0.8
+!  TRANSLATE -1.85, -0.8, 0.0
+!}
+
+! Lens 3
+
+!PARABOLOID Out3 {
+!  Material = Lens, Height = 0.035, Inverse
+!  ROTATE_Y  1.5707963 SCALE 1.5 TRANSLATE  0.28, 0.0, 0.0
+!  Scale 0.8, Rotate_Z 0.8
+!  TRANSLATE -2.1, -1.075, 0.65
+!}
+!
+!PARABOLOID In3 {
+!  Material = Lens, Height = 0.035, Inverse
+!  ROTATE_Y -1.5707963 SCALE 1.5 TRANSLATE  0.3, 0.0, 0.0
+!  Scale 0.8, Rotate_Z 0.8
+!  TRANSLATE -2.1, -1.075, 0.65
+!}
+!
+!SPHERE Frm3 {
+!  Material = Lens, ROTATE_Y -1.5707963 SCALE 0.28549, Start = -0.2207, Stop = 0.2207
+!  TRANSLATE  0.29,0,0
+!  Scale 0.8, Rotate_Z 0.8
+!  TRANSLATE -2.1, -1.075, 0.65
+!}
+!
+!CYLINDER Stand2 {
+!  Material = Gold
+!  Stretch 0.0375, 0.0375, 0.54
+!  TRANSLATE  0.29,0,0
+!  Scale 0.8, Rotate_Z 0.8
+!  TRANSLATE -2.1, -1.075, 0.00
+!}
+
+! Light
+
+SPHERE Beamer {
+  Material = Light1
+  Scale 0.01, TRANSLATE 0.5, 0, 0.65
+}
+
+CYLINDER outer_Hull {
+  Material = Red
+  Stretch 0.06, 0.06, 0.2 Rotate_Y 1.5707963 Translate 0.55,0,0.65
+}
+
+CYLINDER inner_Hull {
+  Material = Black, Inverse
+  Stretch 0.05, 0.05, 0.2 Rotate_Y 1.5707963 Translate 0.55,0,0.65
+}
+
+RING Back {
+  Material = Black
+  Scale 0.05 Rotate_Y 1.5707963 Translate 0.55,0,0.65
+}
+
+CYLINDER Stand3 {
+  Material = Red
+  Stretch 0.03, 0.03, 0.615 Translate 0.45,0,0
+}
+
+PARALLELOGRAM Light {
+  Material Light2, VISIBLE 0
+  BASE  =  -0.6, -2.5,  2.0
+  EDGE1 =  -0.6,  0.0,  0.0
+  EDGE2 =   0.0,  1.0,  0.0
+  ROTATE_Z -0.78539
+}
+
+Ray Ray1R { Origin = 0.48,  0.004, 0.65; Direction = -1.0,  0.2, 0.00; wavelength = 660 }
+Ray Ray2R { Origin = 0.48,  0.002, 0.65; Direction = -1.0,  0.1, 0.00; wavelength = 660 }
+Ray Ray3R { Origin = 0.48,  0.000, 0.65; Direction = -1.0,  0.0, 0.00; wavelength = 660 }
+Ray Ray4R { Origin = 0.48, -0.002, 0.65; Direction = -1.0, -0.1, 0.00; wavelength = 660 }
+Ray Ray5R { Origin = 0.48, -0.004, 0.65; Direction = -1.0, -0.2, 0.00; wavelength = 660 }
+
+Ray Ray1G { Origin = 0.48,  0.004, 0.65; Direction = -1.0,  0.2, 0.00; wavelength = 530 }
+Ray Ray2G { Origin = 0.48,  0.002, 0.65; Direction = -1.0,  0.1, 0.00; wavelength = 530 }
+Ray Ray3G { Origin = 0.48,  0.000, 0.65; Direction = -1.0,  0.0, 0.00; wavelength = 530 }
+Ray Ray4G { Origin = 0.48, -0.002, 0.65; Direction = -1.0, -0.1, 0.00; wavelength = 530 }
+Ray Ray5G { Origin = 0.48, -0.004, 0.65; Direction = -1.0, -0.2, 0.00; wavelength = 530 }
+
+Ray Ray1B { Origin = 0.48,  0.004, 0.65; Direction = -1.0,  0.2, 0.00; wavelength = 470 }
+Ray Ray2B { Origin = 0.48,  0.002, 0.65; Direction = -1.0,  0.1, 0.00; wavelength = 470 }
+Ray Ray3B { Origin = 0.48,  0.000, 0.65; Direction = -1.0,  0.0, 0.00; wavelength = 470 }
+Ray Ray4B { Origin = 0.48, -0.002, 0.65; Direction = -1.0, -0.1, 0.00; wavelength = 470 }
+Ray Ray5B { Origin = 0.48, -0.004, 0.65; Direction = -1.0, -0.2, 0.00; wavelength = 470 }
+
+Ray Ray1M { Origin = 0.48,  0.004, 0.65; Direction = -1.0,  0.2, 0.00; wavelength = 410 }
+Ray Ray2M { Origin = 0.48,  0.002, 0.65; Direction = -1.0,  0.1, 0.00; wavelength = 410 }
+Ray Ray3M { Origin = 0.48,  0.000, 0.65; Direction = -1.0,  0.0, 0.00; wavelength = 410 }
+Ray Ray4M { Origin = 0.48, -0.002, 0.65; Direction = -1.0, -0.1, 0.00; wavelength = 410 }
+Ray Ray5M { Origin = 0.48, -0.004, 0.65; Direction = -1.0, -0.2, 0.00; wavelength = 410 }

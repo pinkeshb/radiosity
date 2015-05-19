@@ -1,0 +1,66 @@
+VMODEL VERSION 0.60
+
+OBJECT: ambient illumination test scene
+AUTHOR: Michael Granz
+DATE  : 22.06.2001
+UPDATE: 05.12.2001 ! file converted to new VModel 0.6 syntax and coordinate system
+
+Settings {
+  HitBuffers = 200
+
+  DiffShots  =   4
+  DiffDepth  =   3
+  SpecDepth  =   0
+
+  GlobalIOR  =   1.0
+
+  BACKGROUND  0.0, 0.0, 0.0
+}
+
+VIEW {
+  Camera = 3.299398, 10.119770, 4.188148, 
+  Target = 0.000000,  0.000000, 0.500000
+  Up     = 0.000000,  0.000000,  1.000000
+  FOVang = 0.349066
+}
+
+Material White {
+  Reflection   = 0.9                          ! white
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.3                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+RING Ring1 { Scale 2.5, Material White }
+
+CYLINDER Cyl {
+  Material White
+  STRETCH 0.5, 0.5, 1.8
+  TRANSLATE -0.7, 1, 0
+}
+
+RING CylTop {
+  Material White
+  Scale 0.5, TRANSLATE -0.7, 1, 1.8
+}
+
+CUBE Quader {
+  Material White
+  SCALE 1.2, Translate 0.5,-0.5,0.5 TRANSLATE 1, 0.5, 0.0
+}
+
+SPHERE Ball1 {
+  Material White
+  SCALE 0.8, TRANSLATE 0.0, -0.5, 0.8
+}
+
+SPHERE Light {
+  Material Light, Inverse, Start = 0.0, Distribution cos_z, VISIBLE -1
+  SCALE 4
+}

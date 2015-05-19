@@ -45,8 +45,8 @@ def project_it(B1,B2,n):
     return B1_proj,B2_proj
 def plot_it():
 
-    n=4
-    B1,B2=main_fn(n,0.001,64) 
+    n=16
+    B1,B2=main_fn(n,0.001,2*n*2*n) 
     # B1 = [ 1]*8
     # B2 =  [ 1]*8
     # B1 = [   0.0179987374259207,  0.00109046436648919,   0.0210336946311762, 0.000612308039260389,   0.0218859058672152,-0.000140315475224752,    0.520100786697704,-0.000860807260604174]
@@ -119,32 +119,32 @@ def plot_it():
     # for i in range(x):
     #     pix2[i]=get_pix(i/float(x),B2,n)
     # print "pix2",pix2
-    img2 = Image.new( 'RGB', (x,y), "black") # create a new black image
-    pixels = img2.load() # create the pixel map
+    # img2 = Image.new( 'RGB', (x,y), "black") # create a new black image
+    # pixels = img2.load() # create the pixel map
      
-    for i in range(img2.size[0]):    # for every pixel:
-        for j in range(img2.size[1]):
-            # pixels[i,j] = (i, i,j) # set the colour accordingly
-            val=int(pix2[i]*255)
-            pixels[i,j]=(val,val,val)
-            # print pixels[i,j]
+    # for i in range(img2.size[0]):    # for every pixel:
+    #     for j in range(img2.size[1]):
+    #         # pixels[i,j] = (i, i,j) # set the colour accordingly
+    #         val=int(pix2[i]*255)
+    #         pixels[i,j]=(val,val,val)
+    #         # print pixels[i,j]
      
-    img2.show()
+    # img2.show()
 
-    img2.save("./b2_"+str(n)+"_","bmp")
+    # img2.save("./b2_"+str(n)+"_","bmp")
 
-    img1 = Image.new( 'RGB', (x,y), "black") # create a new black image
-    pixels1 = img1.load() # create the pixel map
+    # img1 = Image.new( 'RGB', (x,y), "black") # create a new black image
+    # pixels1 = img1.load() # create the pixel map
      
-    for i in range(img1.size[0]):    # for every pixel:
-        for j in range(img1.size[1]):
-            # pixels[i,j] = (i, i,j) # set the colour accordingly
-            val1=int(pix1[i]*255.0/max)
-            # print val1
-            pixels1[i,j]=(val1,val1,val1)
-            # print pixels[i,j]
+    # for i in range(img1.size[0]):    # for every pixel:
+    #     for j in range(img1.size[1]):
+    #         # pixels[i,j] = (i, i,j) # set the colour accordingly
+    #         val1=int(pix1[i]*255.0/max)
+    #         # print val1
+    #         pixels1[i,j]=(val1,val1,val1)
+    #         # print pixels[i,j]
      
-    img1.show()
-    img1.save("./b1_"+str(n)+"_","bmp")
+    # img1.show()
+    # img1.save("./b1_"+str(n)+"_","bmp")
 
 plot_it()

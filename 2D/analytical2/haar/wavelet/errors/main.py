@@ -10,17 +10,17 @@ def K_Error(K,n):
 	for i in range(0, n):
 		for j in range(0, n):
 			f_error = lambda s, t: (f1(s, t) - K[i, j] * pow(n, 0.5) * pow(n, 0.5))*(f1(s, t) - K[i, j] * pow(n, 0.5) * pow(n, 0.5))
-			K_error[i, j] = quad(f_error, [i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)])
+			K_error[i, j] = quad(f_error, [i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)],,method='gauss-legendre')
 
 	return K_error
 def B_Error(B_proj,n):
-	b = lambda s:lambda s:8.0/9.0*s*s*s*s+32.0/45.0
+	b = lambda s:8.0/9.0*s*s*s*s+32.0/45.0
 	print n
 	B_error=zeros(n,1)
 	for i in range(n):
 		print i,"afdjahdf"
 		b_error=lambda s:(b(s)-B_proj[i])*(b(s)-B_proj[i])
-		B_error[i]=quad(b_error,[i / float(n), (i + 1) / float(n)])
+		B_error[i]=quad(b_error,[i / float(n), (i + 1) / float(n)],,method='gauss-legendre')
 
 		print i,"afdjahdf"
 	return B_error

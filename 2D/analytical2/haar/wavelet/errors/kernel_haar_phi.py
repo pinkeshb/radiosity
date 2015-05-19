@@ -10,7 +10,7 @@ def project_kernel_haar_phi(n):
     for i in range(0, n):
         for j in range(0, n):
             K[i, j] = quad(
-                f, [i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)])
+                f, [i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)],method='gauss-legendre')
             print[
                 i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)]
 

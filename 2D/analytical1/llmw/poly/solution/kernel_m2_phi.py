@@ -40,7 +40,7 @@ def project_kernel_m2_phi(n):
 
 	return K
 
-# print project_kernel_m2_phi(4)
+print project_kernel_m2_phi(1)
 # m=linspace(0,1,250)
 # i=0
 # j=1

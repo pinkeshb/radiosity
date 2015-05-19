@@ -1,7 +1,7 @@
 from main import *
 
 thres=0.001
-n_min,n_max=2,4
+n_min,n_max=2,7
 
 fname = 'haar_scale_all_error' + ".txt"
 fo = open(fname, "w")

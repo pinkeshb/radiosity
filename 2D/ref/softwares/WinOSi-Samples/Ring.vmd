@@ -1,0 +1,63 @@
+VMODEL VERSION 0.60
+
+OBJECT: Diacaustic Test Scene - a ring on a plane
+AUTHOR: Michael Granz
+DATE  : 26.10.2001
+
+Settings {
+  HitBuffers = 300
+
+  DiffShots  =   4
+  DiffDepth  =   2
+  SpecDepth  =   2
+
+  GlobalIOR  =   1.0
+
+  BACKGROUND  0.0, 0.0, 0.0     ! black
+}
+
+! current active view:
+
+View {
+  Camera =  0.110596, -0.297306,  0.446999
+  Target =  0.002273, -0.007947, -0.005729
+  Up     = -0.227789,  0.794802,  0.562497
+  FoVAng = 20°
+}
+
+! material definitions:
+
+Material Ground {
+  Reflection   = Texture("Travertn.BMP")      ! texture map
+  Specularity  = 0.15, Exponent 40            ! mirrored (not perfect)
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Copper {
+  Reflection   = RGB(0.9, 0.4, 0.3)           ! copper
+  Specularity  = 0.6                          ! Mirror
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.0                          ! lambertian
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+SPHERE Sun { Material = Light, SCALE 0.01, TRANSLATE  0.15, -0.1, 0.25 }
+
+! The Ring with rounded caps
+CYLINDER outer_Ring { Material = Copper, STRETCH 0.052, 0.052, 0.03               , Translate 0,0,0.002 }
+CYLINDER inner_Ring { Material = Copper, STRETCH 0.048, 0.048, 0.03, Inverse      , Translate 0,0,0.002 }
+TORUS Top { Material = Copper, R1=0.050, R2=0.002, Start=0.0000000, Stop=3.1415927, Translate 0,0,0.032 }
+TORUS Bot { Material = Copper, R1=0.050, R2=0.002, Start=3.1415927, Stop=6.2831853, Translate 0,0,0.002 }
+
+PARALLELOGRAM Ground {
+  Material Ground
+  BASE  = -0.09, -0.09, 0.0
+  EDGE1 =  0.18,  0.00, 0.0
+  EDGE2 =  0.00,  0.18, 0.0
+}
+

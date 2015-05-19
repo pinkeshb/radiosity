@@ -1,0 +1,147 @@
+VMODEL VERSION 0.60
+
+OBJECT: lightguide test scene
+AUTHOR: Michael Granz
+DATE  : 12/13/2001
+
+Settings {
+  HitBuffers     = 300
+
+  SpecLightDepth =  20
+  SpecViewDepth  =   4
+  DiffDepth      =   3
+
+  GlobalIOR      = 1.0
+}
+
+View  {
+  Camera  -6.864070, -6.259600, 5.304019
+  Target   1.765047,  1.431014, 0.105273
+  Up       0.202029,  0.382721, 0.901504
+  FoVAng  21.405636°
+}
+
+! material definitions:
+
+Material Grey {
+  Reflection   = 0.8                          ! grey
+  Specularity  = 0.0                          ! ideal lambertian reflector
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+Material Quarz {
+  Emission     = 0.0                          ! no light emission
+  Reflection   = frf(0)                       ! reflection by fresnel formula
+  Specularity  = 1.0                          ! ideal mirror
+  ior          = 1.525 +  9.5 / (w - 156.0)   ! index of refraction as function of wavelength w
+}
+
+Material Lens {
+  Emission     = 0.0                          ! no light emission
+  Reflection   = frf(0)                       ! reflection by fresnel formula
+  Specularity  = 1.0                          ! ideal mirror
+  ior          = 1.6                          ! index of refraction independent from wavelength
+}
+
+Material Light {
+  Emission     = 1.0                          ! perfect white light
+  Reflection   = 0.8                          ! colour grey
+  Specularity  = 0.2                          ! shiny surface
+  Transmission = 0.0                          ! no transparency (fully opaque)
+}
+
+! scene geometry:
+
+! Lens 1
+
+PARABOLOID In1 {
+  Material = Lens, Height = 0.03
+  ROTATE_Y  1.5707963 SCALE 1.5 TRANSLATE  0.3, 0.0, 0.0
+  TRANSLATE -0.3875, 0.0, 0.0
+  Rotate_Z 90°, Translate -1,0.4,0
+}
+
+PARABOLOID Out1 {
+  Material = Lens, Height = 0.03
+  ROTATE_Y -1.5707963 SCALE 1.5 TRANSLATE  0.2, 0.0, 0.0
+  TRANSLATE -0.3875, 0.0, 0.0
+  Rotate_Z 90°, Translate -1,0.4,0
+}
+
+CYLINDER Hull1 {
+  Material = Lens
+  Stretch 0.2598, 0.2598, 0.01 Rotate_Y 1.5707963 Translate -0.1325,0,0.0
+  Rotate_Z 90°, Translate -1,0.4,0
+}
+
+! Light
+
+SPHERE Beamer {
+  Material = Light
+  Scale 0.05, TRANSLATE 0.5, 0, 0.0
+  Rotate_Z 90°, Translate -1,0.4,0
+}
+
+! Lightguide
+
+Ring lg_in {
+  Material Quarz
+  Scale 0.2, Rotate_X 90°, Translate -1,0,0
+}
+
+Torus lg1 {
+  Material Quarz
+  Angle 90°, R1=1.0, R2=0.2
+  Rotate_Z 180°
+}
+
+Torus lg2 {
+  Material Quarz
+  Angle 90°, R1=1.0, R2=0.2
+  Rotate_X 90°, Translate 0,-1,1
+}
+
+Torus lg3 {
+  Material Quarz
+  Angle 90°, R1=1.0, R2=0.2
+  Rotate_Z -180°, Rotate_Y -90°, Translate 1,0,1
+}
+
+Cylinder lg4 {
+  Material Quarz
+  Stretch 0.2, 0.2, 1.0, Rotate_X 90°, Translate 1,0,2
+}
+
+Ring lg_out {
+  Material Quarz
+  Scale 0.2, Rotate_X 90°, Translate 1,1,2
+}
+
+! Background
+
+PARALLELOGRAM Ground {
+  Material Grey
+  BASE  =  2.5,  1.5, -1.5
+  EDGE1 = -5.0,  0.0,  0.0
+  EDGE2 =  0.0, -4.0,  0.0
+}
+
+PARALLELOGRAM Wall1 {
+  Material Grey, VISIBLE 1
+  BASE  = -2.5,  1.5, -1.5
+  EDGE1 =  5.0,  0.0,  0.0
+  EDGE2 =  0.0,  0.0,  5.0
+}
+
+PARALLELOGRAM Wall2 {
+  Material Grey, VISIBLE 1
+  BASE  =  2.5,  1.5, -1.5
+  EDGE1 =  0.0, -4.0,  0.0
+  EDGE2 =  0.0,  0.0,  5.0
+}
+
+Ray RayM { Origin = -1.0, 0.8, 0.0; Direction =  0.0, -1.0,  0.0; wavelength = 530 }
+Ray RayT { Origin = -1.0, 0.8, 0.0; Direction =  0.2, -1.0,  0.0; wavelength = 470 }
+Ray RayB { Origin = -1.0, 0.8, 0.0; Direction = -0.2, -1.0,  0.0; wavelength = 470 }
+Ray RayL { Origin = -1.0, 0.8, 0.0; Direction =  0.0, -1.0,  0.2; wavelength = 660 }
+Ray RayR { Origin = -1.0, 0.8, 0.0; Direction =  0.0, -1.0, -0.2; wavelength = 660 }

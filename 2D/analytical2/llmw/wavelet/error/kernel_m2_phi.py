@@ -34,7 +34,7 @@ def project_kernel_m2_phi(n):
 				# pyplot.show()
 
 			# print f
-			K[i,j]=quad(f,[(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)])
+			K[i,j]=quad(f,[(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)],method='gauss-legendre')
 			print [(i/2)/float(n),((i/2)+1)/float(n)],[(j/2)/float(n),((j/2)+1)/float(n)]
 			# K[i,j]=i*j
 

@@ -72,4 +72,4 @@ def main_fn(n, thres):
     return B1_proj, B2_proj, K
 if __name__ == "__main__":
     thres = 0.001
-    print main_fn(4, thres)
+    print main_fn(8, thres)

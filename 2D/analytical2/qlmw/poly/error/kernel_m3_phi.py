@@ -49,7 +49,7 @@ def project_kernel_m3_phi(n):
                 # pyplot.show()
 
             # print f
-            K[i,j]=quad(f,[(i/3)/float(n),((i/3)+1)/float(n)],[(j/3)/float(n),((j/3)+1)/float(n)])
+            K[i,j]=quad(f,[(i/3)/float(n),((i/3)+1)/float(n)],[(j/3)/float(n),((j/3)+1)/float(n)],method='gauss-legendre')
             print [(i/3)/float(n),((i/3)+1)/float(n)],[(j/3)/float(n),((j/3)+1)/float(n)]
             # if abs(K[i,j])<=0.0000000001:
             #     K[i,j]=0
@@ -94,7 +94,7 @@ def project_kernel_m3_phi(n):
                                                 - K[3*i+2, 3*j+2] * dia_trans(s, a, (i) / float(n),
                                               phi_2_m3) * dia_trans(t, a, (j) / float(n), phi_2_m3))
 
-            K_error[i, j] = quad(f_error, [i / float(n), (i + 1) / float(n)],[j / float(n), (j + 1) / float(n)])
+            K_error[i, j] = quad(f_error, [i / float(n), (i + 1) / float(n)],[j / float(n), (j + 1) / float(n)],method='gauss-legendre')
             print [i / float(n), (i + 1) / float(n)]
             print [j / float(n), (j + 1) / float(n)]
 
