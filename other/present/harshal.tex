@@ -1,0 +1,378 @@
+% This text is proprietary.
+% It's a part of presentation made by myself.
+% It may not used commercial.
+% The noncommercial use such as private and study is free
+% Dec 2007
+% Author: Sascha Frank 
+% University Freiburg 
+% www.informatik.uni-freiburg.de/~frank/
+%
+% 
+\documentclass{beamer}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{amsmath}
+\usetheme{Warsaw}
+\usepackage{biblatex}
+%\usepackage{url}
+%\usepackage{cite}
+
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{1}}
+\begin{document}
+\title{Scalable Video Coding: Scalability Mode Selection}  
+\author{Harshal Nishar (123079044) }
+\titlegraphic{\includegraphics[scale=0.15]{iitb_logo.jpg}}
+\institute{Guide: Prof. V. M. Gadre \\ Department of Electrical Engineering \\ Indian Institute of Technology Bombay}
+\date{September 25, 2014}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+\begin{frame}[shrink]\frametitle{Outline}
+\tableofcontents
+\end{frame} 
+
+
+\section{Introduction} 
+%\begin{frame}\frametitle{Introduction}
+%\begin{itemize}
+%\setlength\itemsep{1 em}
+%\item Multiuser and heterogeneous environment 
+%\item Increasing video content applications like multimedia messaging, online video streaming, telephony and video conferencing 
+%\item Need for adaptation depending on user requirement and network conditions
+%\item Need for better video coding and transmission technology
+%\item Scalable Video Coding (SVC) most simple and flexible solution
+%\end{itemize}
+%\end{frame}
+
+\subsection{Scalable Video Coding}
+\begin{frame}\frametitle{Scalable Video Coding (SVC)}
+\begin{itemize}
+\setlength\itemsep{1.5 em}
+\item Encoding the video in a single bitstream with highest quality and resolution, subset of which can be extracted and decoded to get desired bit-rate, quality and resolution
+\item Types of Scalability
+\begin{itemize}
+\setlength\itemsep{0.5 em}
+\item Temporal scalability (Frame rate)
+\item Spatial scalability (Spatial resolution)
+\item Quality/SNR scalability (Quantization stepsize)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Ideal Scalable Bitstream}
+  \begin{figure}
+  \centering
+  \includegraphics[scale=0.3]{idealscalable.png}
+  \caption{Ideal Scalable Bitstream \footfullcite{Y. Wang et al., Video Processing and Communications}}
+  \label{idealscalable}
+  \end{figure}
+\end{frame}
+
+\subsection{Scalability Mode Selection}
+\begin{frame}\frametitle{Problem of Scalability Mode Selection}
+\begin{itemize}
+\setlength\itemsep{1 em}
+\item Main purpose of SVC is to provide scalablity type adaptation at transmitter side
+\item Same bit-rate can be obtained in different ways using different set of scalabilities
+\item Selection of the appropriate set of scalability type which will give best viewing quality under given bit-rate constraint
+\item Optimal scalability mode would be video content dependent 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Higher Level Problem Formulation}
+Let $\textbf{x} = (x_{1},x_{2},...,x_{N})$ be the scalability mode \\
+$\textbf{x} \in A$,
+$A \rightarrow$ Set of all possible scalability modes\\
+$Q(\textbf{x}) \rightarrow$ Perceptual quality and $R(\textbf{x}) \rightarrow$  Bit-rate as a function of $\textbf{x}$,
+\begin{align}
+\textbf{x}_{opt} = \operatorname*{arg\,max}_{\textbf{x} \in A} \ Q(\textbf{x}) \notag \\
+such \ that, \ R(\textbf{x}) \leq R_0
+\end{align}
+$R_0 \rightarrow$ Bit-rate constraint and \\
+$\textbf{x}_{opt} \rightarrow$ Optimal scalability mode \\
+In our case, $\textbf{x} = (s,t,q)$ \\
+\hspace{19 mm} $s \rightarrow $ Spatial scalability level\\
+\hspace{19 mm} $t \rightarrow $ Temporal scalability level\\
+\hspace{19 mm} $q \rightarrow $ Quality/SNR scalability level
+\end{frame}
+
+%\subsection{Trade Offs}
+%\begin{frame}\frametitle{Different Trade Offs}
+%\begin{description}
+% \item [Throughput power tradeoff] If $R$ bits/sec have to be transmitted, in error free communication, power required is 
+%\begin{equation}
+% P(x,R)= \frac{WN_0}{x}(2^\frac{R}{W}-1)
+%\end{equation}
+%\end{description}
+%\begin{description}
+% \item [Power delay tradeoff] To minimize power: BS selects user with best channel.
+%Effect: Increase in queuing delay of packets in other users.
+%\end{description}
+%
+%\end{frame}
+
+
+\section{Literature Survey}
+\begin{frame}\frametitle{Literature Survey}
+\begin{itemize}
+\setlength\itemsep{0.8 em}
+\item Conventional work concerned with rate-distortion optimization considering only quantization parameter under fixed frame rate and spatial resolution
+\item Recent literature deals mainly with SNR-temporal scalability or spatial-temporal scalability selection
+\item Heuristic based criteria
+\item Very little work available on all three scalability type selection simultaneously
+\item General approaches of multidimensional scalability mode selection are,
+	\begin{itemize}
+	\item[--] Classification based Methods
+	\item[--] Analytical Modeling based Methods
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Classification Based Methods}
+\begin{frame}\frametitle{Classification Based Methods}
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{classification.png}
+\caption{Classification based Framework for Scalability Mode Selection \footfullcite{Yong Wang et al.}}
+\label{classification}
+\end{figure}
+\end{frame} 
+
+\begin{frame}\frametitle{}
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{akyol_block.png}
+\caption{Scalability Type Selection using Distortion Measures \footfullcite{Akyol et al.}}
+\label{akyol_block}
+\end{figure}
+\vspace{-3 mm}
+\begin{align}
+D(m) = \alpha_{block}(i)D_{block}(m)+\alpha_{flat}(i)D_{flat}(m) \\ \notag
++\alpha_{blur}(i)D_{blur}(m)+\alpha_{jerk}(i)D_{jerk}(m)
+\end{align}
+\end{frame}
+
+\subsection{Analytical Modeling Based Methods}
+\begin{frame}\frametitle{Analytical Modeling Based Methods}
+Yao Wang et al. modeled bit-rate and perceptual quality as a function of frame rate ($t$), quantization stepsize ($q$) and spatial resolution ($s$)
+\begin{equation}
+R(q,s,t) = R_{max} \left(\frac{q}{q_{min}}\right)^{-a} \left(\frac{t}{t_{max}}\right)^{b} \left(\frac{s}{s_{max}}\right)^{c}
+\end{equation}
+\begin{equation}
+Q(q,s,t) = \frac{1-e^{-\alpha_q\left(\frac{q_{min}}{q}\right)^{\beta_q}}}{1-e^{-\alpha_q}}
+\frac{1-e^{-\alpha_s(q)\left(\frac{s}{s_{max}}\right)^{\beta_s}}}{1-e^{-\alpha_s}}
+\frac{1-e^{-\alpha_t\left(\frac{t}{t_{max}}\right)^{\beta_t}}}{1-e^{-\alpha_t}}
+\end{equation}
+$R_{max}$, $a$, $b$, $c$, $\alpha_q$, $\alpha_s$ and $\alpha_t$ are content dependent model parameters
+\end{frame}
+
+\subsection{Perceptual Quality}
+\begin{frame}\frametitle{Perceptual Quality}
+\begin{itemize}
+\setlength\itemsep{1 em}
+\item PSNR does not accurately correlate with subjective quality when effect of frame rate and spatial resolution is considered
+\item MSE also does not correlate with visual distortions
+\item Effects of spatial or temporal resolution reduction on video quality is definitely content dependent
+\item Further investigation on video quality as a function of $x = (s,t,q)$ is needed
+\end{itemize}
+\end{frame}
+
+
+\section{Content Based Features}
+\subsection{Spatial and Compressed Domain Features}
+\begin{frame}\frametitle{Spatial and Compressed Domain Features}
+\begin{itemize}
+\setlength\itemsep{1 em}
+\item Gradient (Edges)
+\item Contrast
+\item Minimum Achievable Bandwidth/Bit-rate
+\item Normalized Frame Difference (Residuals)
+\item Motion Vectors
+\item Displaced Frame Difference (Motion Estimated Residuals)
+\end{itemize}
+\end{frame}
+
+\subsection{Spectral Domain Features}
+\begin{frame}\frametitle{Spectral Domain Features}
+\begin{figure}
+\centering
+\includegraphics[scale=0.29]{ankit_block2.png}
+\caption{Spectral Information based Scalability Mode Selection \footfullcite{Ankit et al.}}
+\label{ankit_block}
+\end{figure}
+\end{frame}
+
+
+\section{Spectral Content Based Metric}
+\begin{frame}\frametitle{Spectral Content Based Metric}
+\begin{itemize}
+\setlength\itemsep{1.5 em}
+\item Whether anything can be said about scalability mode selection from spectral information of video
+\item Spectral information can possibly give very significant clues
+\item Can also be used as an additional feature to improve the prediction
+\end{itemize}
+\end{frame}
+
+\subsection{Metric Development}
+\begin{frame}\frametitle{Metric Development}
+$v(x,y,t) \rightarrow$ Video sequence, $v_p(x,y,t) \rightarrow$ Zero padded video \\
+$(M,N) \rightarrow$  x,y resolution and $T \rightarrow$ Frame rate \\
+Applying 3D DFT we get,
+\begin{equation}
+V(k_{x},k_{y},k_{t}) = \sum\limits_{x=0}^{M-1} \sum\limits_{y=0}^{N-1} \sum\limits_{t=0}^{T-1} v_p(x,y,t) \ e^{\left(-j2\pi\left(\frac{xk_x}{M} + \frac{yk_y}{N} + \frac{tk_t}{T}\right)\right)}
+\end{equation}
+\begin{equation}
+\omega_x = \frac{2\pi k_x}{M}, \omega_y = \frac{2\pi k_y}{N} \ and \ \omega_t = \frac{2\pi k_t}{T}
+\end{equation}
+$\omega$ is the normalized angular frequency
+\end{frame}
+
+\begin{frame}
+Average energy along each frequency axis,
+\begin{align}
+\bar{V}_t(k_t) &= \frac{1}{MN} \sum\limits_{k_x=0}^{M-1} \sum\limits_{k_y=0}^{N-1} V(k_x,k_y,k_t) V^*(k_x,k_y,k_t) \\
+\bar{V}_x(k_x) &= \frac{1}{TN} \sum\limits_{k_t=0}^{T-1} \sum\limits_{k_y=0}^{N-1} V(k_x,k_y,k_t) V^*(k_x,k_y,k_t) \\
+\bar{V}_y(k_t) &= \frac{1}{MT} \sum\limits_{k_x=0}^{M-1} \sum\limits_{k_t=0}^{T-1} V(k_x,k_y,k_t) V^*(k_x,k_y,k_t)
+\end{align}
+Converting to probability mass function over frequency,
+\begin{align}
+f_t(k_t) &= \frac{\bar{V}_t(k_t)}{\sum\limits_{k_t=0}^{T-1}\bar{V}_t(k_t)}, \
+f_x(k_x) &= \frac{\bar{V}_x(k_x)}{\sum\limits_{k_x=0}^{M-1}\bar{V}_x(k_x)}, \
+f_t(k_y) &= \frac{\bar{V}_t(k_y)}{\sum\limits_{k_y=0}^{N-1}\bar{V}_y(k_y)}
+\end{align}
+\end{frame}
+
+\begin{frame}\frametitle{Cumulative Distribution of Energy over Frequency (CDEF)}
+\vspace{-9 mm}
+\begin{align}
+F_t(k) &= f_t(0) + 2\sum\limits_{k_t=1}^{k} f_t(k_t), \ 0 \leq k \leq M/2\\
+F_x(k) &= f_x(0) + 2\sum\limits_{k_x=1}^{k} f_x(k_x), \ 0 \leq k \leq N/2\\
+F_y(k) &= f_t(0) + 2\sum\limits_{k_y=1}^{k} f_y(k_y), \ 0 \leq k \leq T/2
+\end{align}
+CDEF is useful in deciding how much high frequency content is present along each axis \\
+$F_t(\omega) \rightarrow$ Fraction of total energy between temporal angular frequency $0$ to $\omega$ \\
+$1 - F_t(\omega) \rightarrow$ Fraction of total energy above $\omega$ to $\pi.$ 
+\end{frame}
+
+\subsection{Results}
+\begin{frame}{Results: akiyo sequence}
+\begin{figure}
+\centering
+\includegraphics[scale=0.38]{akiyo_cif_energy.png}
+\caption{Energy Distribution over Frequency for {\tt akiyo} sequence}
+\label{akiyo_energy}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results: akiyo sequence}
+\begin{figure}
+\centering
+\includegraphics[scale=0.38]{akiyo_cif_energy_c.png}
+\caption{CDEF for {\tt akiyo} sequence}
+\label{akiyo_energy}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results: bus sequence}
+\begin{figure}
+\centering
+\includegraphics[scale=0.38]{bus_cif_energy.png}
+\caption{Energy Distribution over Frequency for {\tt bus} sequence}
+\label{bus_energy}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results: bus sequence}
+\begin{figure}
+\centering
+\includegraphics[scale=0.38]{bus_cif_energy_c.png}
+\caption{CDEF for {\tt bus} sequence}
+\label{bus_energy}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results: city sequence}
+\begin{figure}
+\centering
+\includegraphics[scale=0.38]{city_cif_energy.png}
+\caption{Energy Distribution over Frequency for {\tt city} sequence}
+\label{city_energy}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results: city sequence}
+\begin{figure}
+\centering
+\includegraphics[scale=0.38]{city_cif_energy_c.png}
+\caption{CDEF for {\tt city} sequence}
+\label{city_energy}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results: football sequence}
+\begin{figure}
+\centering
+\includegraphics[scale=0.38]{football_cif_energy.png}
+\caption{Energy Distribution over Frequency for {\tt football} sequence}
+\label{football_energy}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results: football sequence}
+\begin{figure}
+\centering
+\includegraphics[scale=0.38]{football_cif_energy_c.png}
+\caption{CDEF for {\tt football} sequence}
+\label{football_energy}
+\end{figure}
+\end{frame}
+
+\section{Future Work}
+\begin{frame}\frametitle{Future Work}
+\begin{itemize}
+\item Encoding of large number of video sequence using JSVM or HEVC scalable codec having all type of scalability
+\item Further literature review on perceptual quality metrics for video
+\item Performance of subjective tests for gathering perceptual quality data
+\item Multi-metric prediction of scalability for greater accuracy of prediction
+\item We must try to relate scalability mode selection with sampling theorem
+\end{itemize}
+\end{frame}
+
+
+%\bibliography{referdb}
+%\bibliographystyle{plain}
+\begin{thebibliography}{99}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem{SVC_overview}
+H. Schwarz, D. Marpe and T. Wiegand, ``Overview of the Scalable Video Coding Extension of the H.264/AVC Standard,'' \emph{IEEE Trans. on CSVT}, 2007.
+
+\bibitem{yao_book}
+Y. Wang, J. Ostermann, and Ya-Qin Zhang, \emph{Video Processing and Communications}, Prentice Hall, 2002.
+
+\bibitem{yong_wang}
+Y. Wang, M. Schaar, S.-F. Chang, and A. C. Loui, ``Classification-based multidimensional adaptation prediction for scalable video coding using subjective quality evaluation,'' \emph{IEEE Trans. on CSVT}, 2005.
+
+\bibitem{akyol}
+E. Akyol, A. M. Tekalp and M. R. Civanlar,``Content-Aware Scalability-Type Selection for Rate Adaptation of Scalable Video,'' \emph{EURASIP Journal on Advances in Signal Processing}, Jan. 2007.
+
+\bibitem{zhanma2}
+Z. Ma, F. C. Fernandes, and Y. Wang, ``Analytical rate model for compressed video considering impacts of spatial, temporal and amplitude resolutions,'' \emph{IEEE Int. Conf. on Multimedia and Expo Workshops}, July 2013.
+
+\bibitem{QSTAR}
+Yen-Fu Ou, Y. Xue, Y. Wang, ``Q-STAR: A Perceptual Video Quality Model Considering Impact of Spatial, Temporal, and Amplitude Resolutions,'' \emph{IEEE Trans. IP}, June, 2014.
+
+\bibitem{ankit}
+A. Bhurane; D. Nutulapati, V. M. Gadre, ``A Novel Content-based Adaptive Scalability Mode Selection for Scalable Video Coding,'' \emph{SPCOM}, 2014.
+
+
+\end{thebibliography}
+
+\end{document}
