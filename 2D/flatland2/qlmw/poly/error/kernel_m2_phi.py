@@ -5,7 +5,7 @@ from matplotlib import pyplot
 
 def project_kernel_m2_phi(n):
     # kernel
-    dist=1
+    dist=0.25
     f1 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
     # basis
     # amplitude=pow(n,0.5)

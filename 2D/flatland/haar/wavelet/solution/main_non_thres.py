@@ -2,14 +2,15 @@ from kernel_haar_phi import *
 from mpmath import *
 import sys
 from wavedecs import *
+from save_read import *
 
 
-def main_fn(n,thres_converge):
+def main_fn(n,thres_converge,dist):
 	fname=str(n)+'haar_wavelet'+".txt"
 	fo = open(fname, "w")
 
-
-	K=project_kernel_haar_phi(n)
+	K = readit(n,"haar_scale_K_mat_dist_"+str(dist))
+	# K=project_kernel_haar_phi(n,dist)
 	K_dwt=dwt2(K)
 	E1 = matrix([[0] * n]).transpose()
 	E1[3 * n / 4:n] = ones(n / 4, 1) / pow(n, 0.5)
@@ -64,7 +65,7 @@ def main_fn(n,thres_converge):
 	           change_energy = change_energy + \
 	               (B1_dwt[i] - B1_dwt_pre[i]) * (B1_dwt[i] - B1_dwt_pre[i]) + \
 	               (B2_dwt[i] - B2_dwt_pre[i]) * (B2_dwt[i] - B2_dwt_pre[i])
-	       if change_energy < thres:
+	       if change_energy < thres_converge:
 	           converged = True
 
    	print "final"
@@ -88,4 +89,5 @@ def main_fn(n,thres_converge):
 
 if __name__ == "__main__":
 	thres=0.001
-	main_fn(4,thres)
+	dist=1
+	main_fn(4,thres,dist)

@@ -12,7 +12,7 @@ def main_fn(n,thres_converge):
 	K=project_kernel_haar_phi(n)
 	K_dwt=dwt2(K)
 	E1 = matrix([[0] * n]).transpose()
-	E1[3 * n / 4:n] = ones(n / 4, 1) / pow(n, 0.5)
+	E1[0:n / 4] = ones(n / 4, 1) / pow(n, 0.5)
 	E2 = matrix([[0] * n])
 	E1_dwt=dwt(E1)
 	E2_dwt=dwt(E2)
@@ -64,7 +64,7 @@ def main_fn(n,thres_converge):
 	           change_energy = change_energy + \
 	               (B1_dwt[i] - B1_dwt_pre[i]) * (B1_dwt[i] - B1_dwt_pre[i]) + \
 	               (B2_dwt[i] - B2_dwt_pre[i]) * (B2_dwt[i] - B2_dwt_pre[i])
-	       if change_energy < thres:
+	       if change_energy < thres_converge:
 	           converged = True
 
    	print "final"

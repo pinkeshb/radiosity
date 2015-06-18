@@ -1,6 +1,6 @@
 from kernel_haar_phi import *
 from mpmath import *
-n=256
+n=16
 fname = str(n) + 'haar_scale_K_mat' + ".txt"
 fo = open(fname, "w")
 fo.write(str(n) + "\n")

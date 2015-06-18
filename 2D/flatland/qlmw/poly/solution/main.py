@@ -1,16 +1,19 @@
 from kernel_m3_phi import *
 from mpmath import *
 import sys
+from save_read import *
 
-def main_fn(n, thres):
+def main_fn(n, thres,dist):
     fname=str(n)+'haar_scale'+".txt"
     fo = open(fname, "w")
+    K=readit(n,'qlmw_K_mat_dist_'+str(dist))
 
-    K=project_kernel_m3_phi(n)
+    # K=project_kernel_m3_phi(n,dist)
     E1=matrix([[1.0/pow(n,0.5)]*n*3]).transpose()
     for i in range(n*3):
         if i%3!=0 or i<9*n/4-1:
             E1[i]=0
+    print E1
     E2=matrix([[0]*n*3]).transpose()
     B1 = zeros(3*n, 1)
     B2 = zeros(3*n, 1)
@@ -77,4 +80,4 @@ def main_fn(n, thres):
     return B1,B2
 if __name__ == "__main__":
     thres = 0.001
-    print main_fn(4, thres)
+    print main_fn(4, thres,0.25)

@@ -1,7 +1,7 @@
 from mpmath import *
-def project_kernel_haar_phi(n):
+def project_kernel_haar_phi(n,dist):
 	# kernel
-	dist=0.25
+	# dist=0.125
 	f1 = lambda s, t:	dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
 	# basis
 	amplitude=pow(n,0.5)
@@ -19,4 +19,5 @@ def project_kernel_haar_phi(n):
 			# K[i,j]=i*j
 
 	return K
+# print project_kernel_haar_phi(8)
 

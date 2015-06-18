@@ -29,29 +29,62 @@ def readit(n,name):
             K[i,j]=float(line[j])
     fo.close()
     return K
+def readiterror(n,name):
+    fname = str(n) + name+ ".txt"
+    fo = open(fname, "r")
+    # fo.write(str(n) + "\n")
+    n=fo.readline()
+    n=int(n)
+    K = matrix(n,n)
+    for i in range(n):
+        line=fo.readline()
+        # print line
+        line = line.split()
+        # print line[0]
+        print i
+        for j in range(n):
+
+            K[i,j]=float(line[j])
+    fo.close()
+    return K
 
 if __name__=="__main__":
     n=4
     dist = 0.25
     K=readit(n,"haar_scale_K_mat_dist_"+str(dist))
-    a_2_mat,b_2_mat,c_2_mat,d_2_mat,e_2_mat,ab2_mat,cd2_mat,ac2_mat,ad2_mat,bc2_mat,bd2_mat,ae2_mat,be2_mat,ce2_mat,de2_mat=smrt_error(n,dist)
-    saveit(n,a_2_mat,"haar_scale_a_2_mat_dist_"+str(dist))
-    saveit(n,a_2_mat,"m2_scale_a_2_mat_dist_"+str(dist))
-    saveit(n,b_2_mat,"m2_scale_b_2_mat_dist_"+str(dist))
-    saveit(n,c_2_mat,"m2_scale_c_2_mat_dist_"+str(dist))
-    saveit(n,d_2_mat,"m2_scale_d_2_mat_dist_"+str(dist))
-    saveit(n,e_2_mat,"m2_scale_e_2_mat_dist_"+str(dist))
-    saveit(n,ab2_mat,"m2_scale_ab2_mat_dist_"+str(dist))
-    saveit(n,cd2_mat,"m2_scale_cd2_mat_dist_"+str(dist))
-    saveit(n,ac2_mat,"m2_scale_ac2_mat_dist_"+str(dist))
-    saveit(n,ad2_mat,"m2_scale_ad2_mat_dist_"+str(dist))
-    saveit(n,bc2_mat,"m2_scale_bc2_mat_dist_"+str(dist))
-    saveit(n,bd2_mat,"m2_scale_bd2_mat_dist_"+str(dist))
-    saveit(n,ae2_mat,"m2_scale_ae2_mat_dist_"+str(dist))
-    saveit(n,be2_mat,"m2_scale_be2_mat_dist_"+str(dist))
-    saveit(n,ce2_mat,"m2_scale_ce2_mat_dist_"+str(dist))
-    saveit(n,de2_mat,"m2_scale_de2_mat_dist_"+str(dist))
+    # a_2_mat,b_2_mat,c_2_mat,d_2_mat,e_2_mat,ab2_mat,cd2_mat,ac2_mat,ad2_mat,bc2_mat,bd2_mat,ae2_mat,be2_mat,ce2_mat,de2_mat=smrt_error(n,dist)
+    # saveit(n,a_2_mat,"haar_scale_a_2_mat_dist_"+str(dist))
+    # saveit(n,a_2_mat,"m2_scale_a_2_mat_dist_"+str(dist))
+    # saveit(n,b_2_mat,"m2_scale_b_2_mat_dist_"+str(dist))
+    # saveit(n,c_2_mat,"m2_scale_c_2_mat_dist_"+str(dist))
+    # saveit(n,d_2_mat,"m2_scale_d_2_mat_dist_"+str(dist))
+    # saveit(n,e_2_mat,"m2_scale_e_2_mat_dist_"+str(dist))
+    # saveit(n,ab2_mat,"m2_scale_ab2_mat_dist_"+str(dist))
+    # saveit(n,cd2_mat,"m2_scale_cd2_mat_dist_"+str(dist))
+    # saveit(n,ac2_mat,"m2_scale_ac2_mat_dist_"+str(dist))
+    # saveit(n,ad2_mat,"m2_scale_ad2_mat_dist_"+str(dist))
+    # saveit(n,bc2_mat,"m2_scale_bc2_mat_dist_"+str(dist))
+    # saveit(n,bd2_mat,"m2_scale_bd2_mat_dist_"+str(dist))
+    # saveit(n,ae2_mat,"m2_scale_ae2_mat_dist_"+str(dist))
+    # saveit(n,be2_mat,"m2_scale_be2_mat_dist_"+str(dist))
+    # saveit(n,ce2_mat,"m2_scale_ce2_mat_dist_"+str(dist))
+    # saveit(n,de2_mat,"m2_scale_de2_mat_dist_"+str(dist))
     # # K=
+    a_2_mat=readiterror(n,"m2_scale_a_2_mat_dist_"+str(dist))
+    b_2_mat=readiterror(n,"m2_scale_b_2_mat_dist_"+str(dist))
+    c_2_mat=readiterror(n,"m2_scale_c_2_mat_dist_"+str(dist))
+    d_2_mat=readiterror(n,"m2_scale_d_2_mat_dist_"+str(dist))
+    e_2_mat=readiterror(n,"m2_scale_e_2_mat_dist_"+str(dist))
+    ab2_mat=readiterror(n,"m2_scale_ab2_mat_dist_"+str(dist))
+    cd2_mat=readiterror(n,"m2_scale_cd2_mat_dist_"+str(dist))
+    ac2_mat=readiterror(n,"m2_scale_ac2_mat_dist_"+str(dist))
+    ad2_mat=readiterror(n,"m2_scale_ad2_mat_dist_"+str(dist))
+    bc2_mat=readiterror(n,"m2_scale_bc2_mat_dist_"+str(dist))
+    bd2_mat=readiterror(n,"m2_scale_bd2_mat_dist_"+str(dist))
+    ae2_mat=readiterror(n,"m2_scale_ae2_mat_dist_"+str(dist))
+    be2_mat=readiterror(n,"m2_scale_be2_mat_dist_"+str(dist))
+    ce2_mat=readiterror(n,"m2_scale_ce2_mat_dist_"+str(dist))
+    de2_mat=readiterror(n,"m2_scale_de2_mat_dist_"+str(dist))
     print K
     K_error=matrix(n,n)
     num_k=0

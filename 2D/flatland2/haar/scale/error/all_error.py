@@ -1,6 +1,6 @@
 from kernel_haar_phi import *
 
-n_min,n_max=2,7
+n_min,n_max=4,5
 
 fname = 'haar_scale_all_error' + ".txt"
 fo = open(fname, "w")

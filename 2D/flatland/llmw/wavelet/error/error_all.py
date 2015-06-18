@@ -1,6 +1,6 @@
 from kernel_m2_phi import *
 
-n_min,n_max=2,3
+n_min,n_max=3,4
 dist=0.25
 fname = 'wavelet_all_error_dist'+str(dist) + ".txt"
 fo = open(fname, "w")

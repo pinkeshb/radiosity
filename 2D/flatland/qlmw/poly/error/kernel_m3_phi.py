@@ -4,7 +4,7 @@ from matplotlib import pyplot
 def project_kernel_m3_phi(n):
   # kernel
   dist=0.25
-  f1 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
+  f1 = lambda s, t: (s+0.1)*(t+0.1)/ (2*pow(((s+0.1)*(s+0.1) +(t+0.1)*(t+0.1)), 1.5))
   # basis
   # amplitude=pow(n,0.5)
   # f2 = lambda s: amplitude
@@ -100,7 +100,21 @@ def project_kernel_m3_phi(n):
           print [j / float(n), (j + 1) / float(n)]
 
   return K,K_error
-
+K,K_error= project_kernel_m3_phi(8)
+print "k",K
+print "K_error",K_error
+# K_error= matrix([[ 2.7054393803228e-5,  3.36280456962089e-7,  6.36890905316085e-9,  1.37588460346931e-9],
+# [3.36280456962092e-7,  7.90459992101333e-8,  7.93550670736207e-9, 5.60134854619416e-10],
+# [6.36890905316085e-9,  7.93550670736207e-9,  2.82505440824011e-9, 5.97870707551982e-10],
+# [1.37588460346931e-9, 5.60134854619416e-10, 5.97870707551982e-10, 2.68954035785158e-10]])
+sum=0
+for i in range(8):
+  for j in range(8):
+    sum=sum+K_error[i,j]
+print sum
+# dist=0.25
+# f1 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
+# print quad(f1,[0,1],[0,1])
 # print project_kernel_m3_phi(4)
 # m=linspace(0,1,250)
 # i=0

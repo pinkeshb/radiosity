@@ -2,6 +2,7 @@ from kernel_haar_phi import *
 from mpmath import *
 import sys
 from read_save import *
+# from wavedecs import *
 def copyit(B1_pre,B1,n):
     # print "inside copyit"
     # print B1_pre

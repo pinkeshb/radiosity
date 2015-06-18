@@ -54,12 +54,12 @@ def thres(K_dwt,top_n):
 			else:
 				K_dwt_thres[i,j]=0
 	return K_dwt_thres
-def main_fn(n,thres_converge,top_n):
+def main_fn(n,thres_converge,top_n,dist):
 	fname=str(n)+'haar_wavelet'+".txt"
 	fo = open(fname, "w")
 
 
-	K=project_kernel_haar_phi(n)
+	K=project_kernel_haar_phi(n,dist)
 	K_dwt=dwt2(K)
 	K_dwt_thres=thres(K_dwt,top_n)
 

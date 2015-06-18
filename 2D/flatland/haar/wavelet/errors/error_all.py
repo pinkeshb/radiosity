@@ -2,14 +2,15 @@ from main import *
 
 thres=0.001
 n_min,n_max=2,3
+dist=0.0625
 
-fname = 'haar_scale_all_error' + ".txt"
+fname = 'haar_scale_all_error' +str(dist)+ ".txt"
 fo = open(fname, "w")
 
 for n_log in range(n_min,n_max):
 	n=pow(2,n_log)
-	top_n=n
-	B_proj,B_error,K,K_error=main_fn(n,thres,top_n)
+	top_n=n*n
+	B_proj,B_error,K,K_error=main_fn(n,thres,top_n,dist)
 	num_k=0
 	for i in range(n):
 		for j in range(n):

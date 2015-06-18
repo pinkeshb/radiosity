@@ -1,4 +1,4 @@
-from kernel_m2_phi import *
+from kernel_m3_phi import *
 from mpmath import *
 import sys
 from wavedecs import *

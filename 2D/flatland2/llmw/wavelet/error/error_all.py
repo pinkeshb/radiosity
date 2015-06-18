@@ -1,13 +1,13 @@
 from kernel_m2_phi import *
 
-n_min,n_max=2,5
+n_min,n_max=2,3
 
 fname = 'wavelet_all_error_div_2*n' + ".txt"
 fo = open(fname, "w")
 
 for n_log in range(n_min,n_max):
     n=pow(2,n_log)
-    top_n=2*n
+    top_n=2*n*2*n
     K,K_dwt,K_dwt_thres,K_thres,K_thres_error = project_kernel_m2_phi(n,top_n)
     # print "K_thres_error = ", K_thres_error, "\n"
     # fo.write("K_thres_error = "+str(K_thres_error) + "\n")

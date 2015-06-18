@@ -2,6 +2,7 @@ from kernel_m2_phi import *
 from mpmath import *
 import sys
 from wavedecs import *
+from save_read import *
 def thres_it(K_dwt,top_n):
     print "K_dwt",K_dwt
     L=[]
@@ -34,11 +35,13 @@ def thres_it(K_dwt,top_n):
                 K_dwt_thres[i,j]=0
     print "K_dwt_thres",K_dwt_thres
     return K_dwt_thres
-def main_fn(n, thres_converge,top_n):
+def main_fn(n, thres_converge,top_n,dist):
     fname=str(n)+'haar_scale'+".txt"
     fo = open(fname, "w")
 
-    K=project_kernel_m2_phi(n)
+    # K=project_kernel_m2_phi(n)
+    K=readit(n,"haar_scale_K_mat_dist_"+str(dist))
+
     K_dwt=dwt2(K)
 
     K_dwt_thres=thres_it(K_dwt,top_n)

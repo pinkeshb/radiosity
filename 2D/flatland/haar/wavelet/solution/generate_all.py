@@ -3,7 +3,8 @@ from mpmath import *
 from wavedecs import *
 from save_read import *
 n=256
-fname = str(n) + 'haar_scale_K_mat_dist_0.25' + ".txt"
+dist=0.0625
+fname = str(n) + 'haar_scale_K_mat_dist_'+str(dist) + ".txt"
 fo = open(fname, "r")
 n=fo.readline()
 n=int(n)
@@ -21,27 +22,27 @@ for i in range(n):
 K1=dwt2_inside(K)
 K1=K1[0:128,0:128]
 n=K1.cols
-saveit(n,K1,"haar_scale_K_mat_dist_0.25")
+saveit(n,K1,"haar_scale_K_mat_dist_"+str(dist))
 K2=dwt2_inside(K1)
 K2=K2[0:64,0:64]
 n=K2.cols
-saveit(n,K2,"haar_scale_K_mat_dist_0.25")
+saveit(n,K2,"haar_scale_K_mat_dist_"+str(dist))
 K3=dwt2_inside(K2)
 K3=K3[0:32,0:32]
 n=K3.cols
-saveit(n,K3,"haar_scale_K_mat_dist_0.25")
+saveit(n,K3,"haar_scale_K_mat_dist_"+str(dist))
 K4=dwt2_inside(K3)
 K4=K4[0:16,0:16]
 n=K4.cols
-saveit(n,K4,"haar_scale_K_mat_dist_0.25")
+saveit(n,K4,"haar_scale_K_mat_dist_"+str(dist))
 K5=dwt2_inside(K4)
 K5=K5[0:8,0:8]
 n=K5.cols
-saveit(n,K5,"haar_scale_K_mat_dist_0.25")
+saveit(n,K5,"haar_scale_K_mat_dist_"+str(dist))
 K6=dwt2_inside(K5)
 K6=K6[0:4,0:4]
 n=K6.cols
-saveit(n,K6,"haar_scale_K_mat_dist_0.25")
+saveit(n,K6,"haar_scale_K_mat_dist_"+str(dist))
 # K3=dwt2_inside(K2[0:64,0:64])
 # K4=dwt2_inside(K3[0:32,0:32])
 # K5=dwt2_inside(K4[0:16,0:16])

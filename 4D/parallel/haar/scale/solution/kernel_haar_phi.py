@@ -1,5 +1,6 @@
 from mpmath import *
 import numpy
+from read_save import *
 
 
 def quadit(f,(a1,b1),(a2,b2),(a3,b3),(a4,b4),deg=5):
@@ -58,6 +59,6 @@ def project_kernel_haar_phi(n,dist):
                     # if i1==i2 and j1==j2:
                         # print K[i1][j1][i2][j2]
     return K
-
-# print project_kernel_haar_phi(4)
+# K=readit(n,dist)
+# print project_kernel_haar_phi(2,0.25)
 # print ([[1]*n]*n)

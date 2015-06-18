@@ -3,7 +3,7 @@ from m3_phi import *
 from matplotlib import pyplot
 def project_kernel_m3_phi(n):
 	# kernel
-	f1 = lambda s, t: s*t/ (2*pow((s*s+ t*t), 1.5))
+	f1 = lambda s, t: (s+0.1)*(t+0.1)/ (2*pow(((s+0.1)*(s+0.1) +(t+0.1)*(t+0.1)), 1.5))
 	# basis
 	# amplitude=pow(n,0.5)
 	# f2 = lambda s: amplitude

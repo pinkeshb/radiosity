@@ -4,7 +4,7 @@ from wavedecs import *
 import ImageDraw
 from save_read import *
 def drawspars(K,n):
-    block=500
+    block=50
     sx=n*block+block
     sy=n*block+block
     img2 = Image.new( 'RGB', (sx,sy), "black") # create a new black image
@@ -39,12 +39,12 @@ def drawspars(K,n):
 
     img2.show()
 if __name__=="__main__":
-    n=32
+    n=16
     dist =0.25
     K=readit(n,"haar_scale_K_mat_dist_"+str(dist))
     # K = project_kernel_haar_phi(n)
     drawspars(K,n)
-    # drawspars(dwt2(K),n)
+    drawspars(dwt2(K),n)
 
 
 # drawspars()

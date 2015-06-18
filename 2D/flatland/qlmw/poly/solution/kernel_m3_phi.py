@@ -1,9 +1,9 @@
 from mpmath import *
 from m3_phi import *
 from matplotlib import pyplot
-def project_kernel_m3_phi(n):
+def project_kernel_m3_phi(n,dist):
 	# kernel
-	dist=1
+	# dist=0.25
 	f1 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
 	# basis
 	# amplitude=pow(n,0.5)

@@ -40,7 +40,8 @@ def project_kernel_m2_phi(n,dist):
 
 	return K
 
-# print project_kernel_m2_phi(8)
+if __name__=="__main__":
+	print project_kernel_m2_phi(8,0.5)
 # m=linspace(0,1,250)
 # i=0
 # j=1

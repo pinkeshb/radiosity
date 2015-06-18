@@ -23,6 +23,7 @@ for n_log in range(n_min,n_max):
 
     print "error_k = ", num_k, "\n"
     fo.write("error_k = "+str(num_k) + "\n")
-
+    print K
+    print K_error
 
     print "\n\n\n"

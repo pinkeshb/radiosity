@@ -32,12 +32,12 @@ def readit(n,name):
 
 if __name__=="__main__":
     n=8
-    dist = 1
-    K=readit(n,"haar_scale_K_mat_dist_1")
+    dist = 0.5
+    K=readit(n,"haar_scale_K_mat_dist_"+str(dist))
     K_f,K_fp,K_p=smrt_error(n,dist)
-    saveit(n,K_f,"haar_scale_K_f_mat_dist_1")
-    saveit(n,K_fp,"haar_scale_K_fp_mat_dist_1")
-    saveit(n,K_p,"haar_scale_K_p_mat_dist_1")
+    saveit(n,K_f,"haar_scale_K_f_mat_dist_"+str(dist))
+    saveit(n,K_fp,"haar_scale_K_fp_mat_dist_"+str(dist))
+    saveit(n,K_p,"haar_scale_K_p_mat_dist_"+str(dist))
     # # K=
     num_k=0
     for i in range(n):

@@ -84,7 +84,7 @@ def plot_it():
         for j in range(img2.size[1]):
             # pixels[i,j] = (i, i,j) # set the colour accordingly
             val=int(pix2[i][j]*255)
-            pixels[i,j]=(val,val,0)
+            pixels[i,j]=(val,0,0)
             # print pixels[i,j]
      
     img2.show()
@@ -96,7 +96,7 @@ def plot_it():
             # pixels[i,j] = (i, i,j) # set the colour accordingly
             val1=int(pix1[i][j]*255.0)
             # print val1
-            pixels1[i,j]=(val1,val1,0)
+            pixels1[i,j]=(val1,0,0)
             # print pixels[i,j]
      
     img1.show()

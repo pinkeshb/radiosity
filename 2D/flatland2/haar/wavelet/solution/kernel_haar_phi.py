@@ -1,22 +1,22 @@
 from mpmath import *
+
+
 def project_kernel_haar_phi(n):
-	# kernel
-	dist=0.25*0.25
-	f1 = lambda s, t:	dist/ (2*pow(((s - t) * (s - t) + dist), 1.5))
-	# basis
-	amplitude=pow(n,0.5)
-	f2 = lambda s: amplitude
-	f3 = lambda s: amplitude
-	# integrand
-	# f = lambda s,t: f1(s,t)*f2(s)*f3(t)
-	f = lambda s,t: f1(s,t)*f3(t)*f2(s)
+    # kernel
+    # dist=1
+    f1 = lambda s, t: s*t/ (2*pow((s*s +t*t), 1.5))
+    f = lambda s, t: f1(s, t) * pow(n, 0.5) * pow(n, 0.5)
 
-	K=matrix(n,n)
-	for i in range(0,n):
-		for j in range(0,n):
-			K[i,j]=quad(f,[i/float(n),(i+1)/float(n)],[j/float(n),(j+1)/float(n)],method='gauss-legendre')
-			print [i/float(n),(i+1)/float(n)],[j/float(n),(j+1)/float(n)]
-			# K[i,j]=i*j
+    K = matrix(n, n)
+    for i in range(0, n):
+        for j in range(0, n):
+            print ((i*n+1+j+1)/256.0)/256.0
 
-	return K
+            K[i, j] = quad(
+                f, [i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)],method='gauss-legendre')
+            print[
+                i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)]
 
+    return K
+
+# print project_kernel_haar_phi(4)

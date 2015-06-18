@@ -46,7 +46,7 @@ def project_it(B1,B2,n):
     return B1_proj,B2_proj
 def plot_it():
 
-    n=8
+    n=4
     B1,B2=main_fn(n,0.001) 
     # B1 = [ 1]*8
     # B2 =  [ 1]*8

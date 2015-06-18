@@ -3,8 +3,7 @@ from m3_phi import *
 from matplotlib import pyplot
 def project_kernel_m3_phi(n):
 	# kernel
-	dist=1
-	f1 = lambda s, t: dist/ (2*pow(((s - t) * (s - t) + dist), 1.5))
+	f1 = lambda s, t: (s+0.1)*(t+0.1)/ (2*pow(((s+0.1)*(s+0.1) +(t+0.1)*(t+0.1)), 1.5))
 	# basis
 	# amplitude=pow(n,0.5)
 	# f2 = lambda s: amplitude
@@ -58,8 +57,9 @@ def project_kernel_m3_phi(n):
 			# K[i,j]=i*j
 
 	return K
-
-print project_kernel_m3_phi(4)
+if __name__=="__main__":
+	dist=0.5
+	print project_kernel_m3_phi(4,dist)
 # m=linspace(0,1,250)
 # i=0
 # j=1

@@ -79,8 +79,8 @@ def idwt_inside(E):
 
         E_idwt[2 * i] = (E[i] + E[length / 2 + i]) / root2
         E_idwt[2 * i + 1] = (E[i] - E[length / 2 + i]) / root2
-        if E_idwt[2 * i + 1] < 0.000000000001:
-            E_idwt[2 * i + 1] = 0
+        # if E_idwt[2 * i + 1] < 0.000000000001:
+        #     E_idwt[2 * i + 1] = 0
 
     return matrix(E_idwt)
 
@@ -99,11 +99,14 @@ if __name__ == "__main__":
         [
             [1, 1, 1, 1],
             [1, 0, 1, 1],
-            [1, 1, 0, 1],
+            [1, 1, 1, 1],
             [1, 1, 1, 0]
         ])
 
-    e = matrix([[1, 1, 1, 1, 1, 1, 1, 0]])
+    e = matrix([[1, 0, 1, 0]])
     # print e
     # print dwt(e)
     # print idwt(dwt(e))
+
+    print dwt2(K)
+    print idwt2(dwt2(K))

@@ -2,7 +2,7 @@ from kernel_m2_phi import *
 
 
 thres=0.001
-n_min,n_max=2,5
+n_min,n_max=2,3
 
 fname = 'haar_scale_all_error' + ".txt"
 fo = open(fname, "w")
@@ -23,6 +23,6 @@ for n_log in range(n_min,n_max):
 
     print "error_k = ", num_k, "\n"
     fo.write("error_k = "+str(num_k) + "\n")
-
+    print K_error
 
     print "\n\n\n"

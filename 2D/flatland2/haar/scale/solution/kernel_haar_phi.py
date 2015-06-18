@@ -16,7 +16,9 @@ def project_kernel_haar_phi(n):
                 f, [i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)],method='gauss-legendre')
             print[
                 i / float(n), (i + 1) / float(n)], [j / float(n), (j + 1) / float(n)]
-
+    # f2 = lambda s,t :f1(s,t)*f1(s,t)
+    # print quad(f2,[0,1],[0,1])
     return K
 
-# print project_kernel_haar_phi(4)
+
+print project_kernel_haar_phi(4)

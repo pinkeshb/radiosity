@@ -1,12 +1,12 @@
 from kernel_m2_phi import *
 from mpmath import *
 import sys
-
-def main_fn(n, thres):
+from save_read import *
+def main_fn(n, thres,dist):
     fname=str(n)+'haar_scale'+".txt"
     fo = open(fname, "w")
 
-    K=project_kernel_m2_phi(n)
+    K=readit(n,"haar_scale_K_mat_dist_"+str(dist))
     E1=matrix([[1.0/pow(n,0.5)]*n*2]).transpose()
     for i in range(n*2):
         if i%2==1 or i<3*n/2:
@@ -43,6 +43,12 @@ def main_fn(n, thres):
         iter += 1
         B1_pre = B1
         B2_pre = B2
+        # print "dim"
+        # print B1
+        # print E1
+        # print K
+        # print B2_pre
+        # print "dim"
         B1 = E1 + K * B2_pre
         B2 = E2 + K * B1_pre
 

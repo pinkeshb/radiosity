@@ -100,7 +100,7 @@ def idwt(E):
 
 	return E_idwt
 if __name__=="__main__":
-	n=8
+	n=4
 	fname = str(n) + 'haar_scale_K_mat' + ".txt"
 	fo = open(fname, "r")
 	# fo.write(str(n) + "\n")
@@ -117,6 +117,7 @@ if __name__=="__main__":
 	K_idwt=idwt2_inside(K_dwt)
 	print K,"asdadasd"
 	print K_dwt,"asdasd"
+	print K_idwt
 	# num_k=0
 	# for i in range(n*2):
 	#     for j in range(n*2):

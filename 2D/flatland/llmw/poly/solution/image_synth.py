@@ -43,10 +43,8 @@ def project_it(B1,B2,n):
         B1_proj[2*i+1]=-dia_trans(0,a,0,phi_2_m2)*B1[2*i+1]
         B2_proj[2*i+1]=-dia_trans(0,a,0,phi_2_m2)*B2[2*i+1]
     return B1_proj,B2_proj
-def plot_it():
-
-    n=16
-    B1,B2=main_fn(n,0.001) 
+def plot_it(n,dist):
+    B1,B2=main_fn(n,0.001,dist) 
     # B1 = [ 1]*8
     # B2 =  [ 1]*8
     # B1 = [   0.0179987374259207,  0.00109046436648919,   0.0210336946311762, 0.000612308039260389,   0.0218859058672152,-0.000140315475224752,    0.520100786697704,-0.000860807260604174]
@@ -78,70 +76,85 @@ def plot_it():
     # pyplot.plot(x,y)
     # # print y ,"y"
     # pyplot.show()
-    x=1024
-    y=1024/2
-    th=x/n
-    pix1=[0]*x
-    # diff=[0]*x
-    # print pix1[x-1][y-1]
-    max=-10
-    for i in range(x):
-        print i/float(x)
-        pix1[i]=get_pix(i/float(x),B1,n)
-        if pix1[i]>max:
-            max = pix1[i]
-    pix2=[0]*x
-    print "max",max
-    for i in range(x):
-        print i/float(x)
-        pix2[i]=get_pix(i/float(x),B2,n)
-        if pix2[i]>max:
-            max = pix2[i]
-    print "max",max
-    pyplot.plot(pix2)
+
+    m=linspace(0,1-0.00000001,250)
+    pyplot.plot(m,[get_pix(x,B2,n) for x in m])
+    pyplot.grid(True)
+    pyplot.ylabel('B1(x)')
+    pyplot.xlabel('x')
+
     # print y ,"y"
     pyplot.show()
-    pyplot.plot(pix1)
+
+
+    pyplot.plot(m,[get_pix(x,B1,n) for x in m],'b')
+
+    # pyplot.plot(pix1)
+    pyplot.ylabel('B2(y)')
+    pyplot.xlabel('y')
+
     # print y ,"y"
+    pyplot.grid(True)
     pyplot.show()
-    # for i in range(x-1):
-    #     diff[i]=pix[i+1]-pix[i]
-    #     if diff[i]<0:
-    #         diff[i]=-1
-    #     elif diff[i]>0:
-    #         diff[i]=+1
-    #     else:
-    #         diff[i]=0
-    # print "pix",pix
-    # print diff
+    # x=1024
+    # y=1024/2
+    # th=x/n
+    # pix1=[0]*x
+    # # diff=[0]*x
+    # # print pix1[x-1][y-1]
+    # max=-10
+    # for i in range(x):
+    #     print i/float(x)
+    #     pix1[i]=get_pix(i/float(x),B1,n)
+    #     if pix1[i]>max:
+    #         max = pix1[i]
+    # pix2=[0]*x
+    # print "max",max
+    # for i in range(x):
+    #     print i/float(x)
+    #     pix2[i]=get_pix(i/float(x),B2,n)
+    #     if pix2[i]>max:
+    #         max = pix2[i]
+    # print "max",max
+
+    # # for i in range(x-1):
+    # #     diff[i]=pix[i+1]-pix[i]
+    # #     if diff[i]<0:
+    # #         diff[i]=-1
+    # #     elif diff[i]>0:
+    # #         diff[i]=+1
+    # #     else:
+    # #         diff[i]=0
+    # # print "pix",pix
+    # # print diff
     # pix2=[0]*x
     # # print pix[x-1][y-1]
     # for i in range(x):
     #     pix2[i]=get_pix(i/float(x),B2,n)
     # print "pix2",pix2
-    img2 = Image.new( 'RGB', (x,y), "black") # create a new black image
-    pixels = img2.load() # create the pixel map
+    # img2 = Image.new( 'RGB', (x,y), "black") # create a new black image
+    # pixels = img2.load() # create the pixel map
      
-    for i in range(img2.size[0]):    # for every pixel:
-        for j in range(img2.size[1]):
-            # pixels[i,j] = (i, i,j) # set the colour accordingly
-            val=int(pix2[i]*255)
-            pixels[i,j]=(val,val,val)
-            # print pixels[i,j]
+    # for i in range(img2.size[0]):    # for every pixel:
+    #     for j in range(img2.size[1]):
+    #         # pixels[i,j] = (i, i,j) # set the colour accordingly
+    #         val=int(pix2[i]*255)
+    #         pixels[i,j]=(val,val,val)
+    #         # print pixels[i,j]
      
-    img2.show()
-    img1 = Image.new( 'RGB', (x,y), "black") # create a new black image
-    pixels1 = img1.load() # create the pixel map
+    # img2.show()
+    # img1 = Image.new( 'RGB', (x,y), "black") # create a new black image
+    # pixels1 = img1.load() # create the pixel map
      
-    for i in range(img1.size[0]):    # for every pixel:
-        for j in range(img1.size[1]):
-            # pixels[i,j] = (i, i,j) # set the colour accordingly
-            val1=int(pix1[i]*255.0/max)
-            # print val1
-            pixels1[i,j]=(val1,val1,val1)
-            # print pixels[i,j]
+    # for i in range(img1.size[0]):    # for every pixel:
+    #     for j in range(img1.size[1]):
+    #         # pixels[i,j] = (i, i,j) # set the colour accordingly
+    #         val1=int(pix1[i]*255.0/max)
+    #         # print val1
+    #         pixels1[i,j]=(val1,val1,val1)
+    #         # print pixels[i,j]
      
-    img1.show()
-
-
-plot_it()
+    # img1.show()
+dist=0.0625
+for n in [4,8,16,32,64,128]:
+    plot_it(n,dist)

@@ -41,7 +41,7 @@ def main_fn(n, thres,dist):
     E1 = [[1 for x in range(2*n)] for x in range(2*n)] 
     for i in range(2*n):
         for j in range(2*n):
-            if i>=3*n/4 or j>=3*n/4 or i<n/4 or j<n/4 or i%2==1 or j%2==1:
+            if i>=3*2*n/4 or j>=3*2*n/4 or i<2*n/4 or j<2*n/4 or i%2==1 or j%2==1:
                 E1[i][j]=0
     # E1[3 * n / 4:n][3 * n / 4:n] =(([[1]*n/4]*n/4)/ pow(n, 0.5)
     # E2 = matrix([[0] * n]).transpose()

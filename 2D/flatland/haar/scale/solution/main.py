@@ -1,13 +1,14 @@
 from kernel_haar_phi import *
 from mpmath import *
 import sys
+from save_read import *
 
 
-def main_fn(n, thres):
+def main_fn(n, thres,dist):
     fname = str(n) + 'haar_scale' + ".txt"
     fo = open(fname, "w")
 
-    K = project_kernel_haar_phi(n)
+    K = readit(n,"haar_scale_K_mat_dist_"+str(dist))
     E1 = matrix([[0] * n]).transpose()
     E1[3 * n / 4:n] = ones(n / 4, 1) / pow(n, 0.5)
     E2 = matrix([[0] * n]).transpose()

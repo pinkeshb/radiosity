@@ -49,9 +49,28 @@ def get_pix(x,B_norm,n):
 #     return B1_proj,B2_proj
 def plot_it():
 
-    n=4
-    dist=0.125/4
-    B1,B2=main_fn(n,0.001,16*9,dist) 
+    n=16
+    dist=0.25
+    B1,B2=main_fn(n,0.001,n*n*9,dist) 
+    m=linspace(0,1-0.00000001,250)
+    pyplot.plot(m,[get_pix(x,B2,n) for x in m])
+    pyplot.grid(True)
+    pyplot.ylabel('B1(x)')
+    pyplot.xlabel('x')
+
+    # print y ,"y"
+    pyplot.show()
+
+
+    pyplot.plot(m,[get_pix(x,B1,n) for x in m],'b')
+
+    # pyplot.plot(pix1)
+    pyplot.ylabel('B2(y)')
+    pyplot.xlabel('y')
+
+    # print y ,"y"
+    pyplot.grid(True)
+    pyplot.show()
     # B1 = [ 1]*8
     # B2 =  [ 1]*8
     # B1 = [   0.0179987374259207,  0.00109046436648919,   0.0210336946311762, 0.000612308039260389,   0.0218859058672152,-0.000140315475224752,    0.520100786697704,-0.000860807260604174]
@@ -130,7 +149,7 @@ def plot_it():
     for i in range(img2.size[0]):    # for every pixel:
         for j in range(img2.size[1]):
             # pixels[i,j] = (i, i,j) # set the colour accordingly
-            val=int(pix2[i]*255)
+            val=int(pix2[i]*255/max)
             pixels[i,j]=(val,val,val)
             # print pixels[i,j]
      

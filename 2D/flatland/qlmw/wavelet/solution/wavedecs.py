@@ -67,6 +67,14 @@ def dwt(E):
         print E_dwt[0:length/pow(2,i)]
         E_dwt[0:length/pow(2,i)]=dwt_inside(E_dwt[0:length/pow(2,i)])
     return E_dwt
+def dwt2_inside(K):
+    K_dwt = copy.deepcopy(K)
+    K_dwt_i = copy.deepcopy(K)
+    for i in range(K.cols):
+        K_dwt_i[:, i] = dwt_inside(K[:, i])
+    for i in range(K.rows):
+        K_dwt[i, :] = dwt_inside(K_dwt_i[i, :]).transpose()
+    return K_dwt
 
 def dwt2(K):
     K_dwt=copy.deepcopy(K)
@@ -76,6 +84,17 @@ def dwt2(K):
     for i in range(K.rows):
         K_dwt[i,:]=dwt(K_dwt_i[i,:].transpose()).transpose()
     return K_dwt
+def idwt2_inside(K):
+    K_dwt = copy.deepcopy(K)
+    K_dwt_i = copy.deepcopy(K)
+    for i in range(K.rows):
+        # print i
+        K_dwt_i[i, :] = idwt_inside(K[i, :].transpose()).transpose()
+    for i in range(K.cols):
+        K_dwt[:, i] = idwt_inside(K_dwt_i[:, i])
+
+    return K_dwt
+
 
 def idwt_inside(E):
     # print E
@@ -158,10 +177,10 @@ def idwt2(K):
     return copy.deepcopy(K_dwt)
 if __name__=="__main__":
 
-    # K=matrix([
-    # [1,0,1,0,1,0],    [0,0,0,0,1,0],[1,0,1,0,1,0],[0,0,0,0,1,0],[0,0,0,0,1,0],[0,0,0,0,1,0]
-    #     ])
-    E=matrix([[0,0,0,0,0,0,0,0,0,0.5,0,0,]])
+    K=matrix([
+    [1,0,1,0,1,0],    [0,0,0,0,1,0],[1,0,1,0,1,0],[0,0,0,0,1,0],[0,0,0,0,1,0],[0,0,0,0,1,0]
+        ])
+    # E=matrix([[0,0,0,0,0,0,0,0,0,0.5,0,0,]])
     # # E=matrix([ 0.288461538460848,0.0333086693845357, 0.403846153845187,0.0333086693845357, 0.519230769229526,0.0333086693845357, 0.634615384613866, 0.0333086693845357])
     # print E,"\n"
     # K_sadas= idwt2(dwt2(K))
@@ -170,6 +189,12 @@ if __name__=="__main__":
     #         if abs(K_sadas[i,j])<0.000000000001:
     #             K_sadas[i,j]=0
     # print K_sadas
-    print dwt_inside(E),"\n"
+    K_rec=idwt2_inside(dwt2_inside(K))
+    print K_rec
+    for i in range(len(K)):
+        for j in range(len(K)):
+            if abs(K_rec[i,j]-K[i,j]) > 0.00000001:
+                print "dief"
+    # print dwt_inside(E),"\n"
     # print idwt_inside(dwt_inside(E)),"\n"
     # print E[0]

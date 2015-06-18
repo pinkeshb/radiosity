@@ -3,7 +3,7 @@ from mpmath import *
 
 def project_kernel_haar_phi(n):
     # kernel
-    dist=1
+    # dist=1
     f1 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
     f = lambda s, t: f1(s, t) * pow(n, 0.5) * pow(n, 0.5)
 

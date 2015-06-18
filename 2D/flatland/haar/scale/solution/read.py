@@ -2,9 +2,10 @@ from kernel_haar_phi import *
 from mpmath import *
 from wavedecs import *
 n=4
-K_original = project_kernel_haar_phi(n)
+dist=0.125
+K_original = project_kernel_haar_phi(n,dist)
 n=256
-fname = str(n) + 'haar_scale_K_mat_dist_0.25' + ".txt"
+fname = str(n) + 'haar_scale_K_mat_dist_'+str(dist) + ".txt"
 fo = open(fname, "r")
 # fo.write(str(n) + "\n")
 n=fo.readline()

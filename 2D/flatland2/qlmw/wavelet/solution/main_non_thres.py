@@ -1,4 +1,4 @@
-from kernel_m2_phi import *
+from kernel_m3_phi import *
 from mpmath import *
 import sys
 from wavedecs import *
@@ -7,20 +7,37 @@ def main_fn(n, thres_converge):
     fname=str(n)+'haar_scale'+".txt"
     fo = open(fname, "w")
 
-    K=project_kernel_m2_phi(n)
+    # K=project_kernel_m3_phi(n)
+    fkname = str(n) + 'qlmw_K_mat_dist_'+str(dist) + ".txt"
+    fk = open(fkname, "r")
+    # fo.write(str(n) + "\n")
+    n=fk.readline()
+    print n
+    n=int(n)
+    print n
+    K = matrix(n*3,n*3)
+    for i in range(n*3):
+        line=fk.readline()
+        line = line.split()
+        for j in range(n*3):
+            K[i,j]=float(line[j])
+            # print float(line[j])
+        # fo.write("\n")
+    # print K
+    fk.close()
     K_dwt=dwt2(K)
 
-    E1=matrix([[1.0/pow(n,0.5)]*n*2]).transpose()
-    for i in range(n*2):
-        if i%2==1 or i<3*n/2:
+    E1=matrix([[1.0/pow(n,0.5)]*n*3]).transpose()
+    for i in range(n*3):
+        if i%3!=0 or i<9*n/4-1:
             E1[i]=0
-    E2=matrix([[0]*n*2]).transpose()
+    E2=matrix([[0]*n*3]).transpose()
     E1_dwt=dwt(E1)
     E2_dwt=dwt(E2)
-    B1_dwt = zeros(2*n, 1)
-    B2_dwt = zeros(2*n, 1)
-    B1_pre = zeros(2*n, 1)
-    B2_pre = zeros(2*n, 1)
+    B1_dwt = zeros(3*n, 1)
+    B2_dwt = zeros(3*n, 1)
+    B1_pre = zeros(3*n, 1)
+    B2_pre = zeros(3*n, 1)
 
     
     print "K=", K
@@ -72,7 +89,7 @@ def main_fn(n, thres_converge):
         print B1_dwt
         print B2_dwt
         change_energy = 0
-        for i in range(2*n):
+        for i in range(3*n):
             change_energy = change_energy + \
                 (B1_dwt[i] - B1_pre[i]) * (B1_dwt[i] - B1_pre[i]) + \
                 (B2_dwt[i] - B2_pre[i]) * (B2_dwt[i] - B2_pre[i])

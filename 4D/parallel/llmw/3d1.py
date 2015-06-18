@@ -17,10 +17,10 @@ def get_pix(x,y,B,n):
                     B[2*i+1][2*j]*dia_trans(s, a, i  / float(n), phi_2_m2)*dia_trans(t, a, j  / float(n), phi_1_m2)
     return b(x,y)
 def get_test_data(delta=0.005):
-    B1,B2=main_fn(4,0.001,1) 
+    B1,B2=main_fn(8,0.001,0.25) 
 
     # f1 = lambda s, t: s*s*s*s+t*t
-    f1 = lambda s, t: get_pix(s,t,B1,4)
+    f1 = lambda s, t: get_pix(s,t,B2,16)
     dist=1
     f2 = lambda s, t: dist*dist/ (2*pow(((s - t) * (s - t) + dist*dist), 1.5))
     f3 = lambda s, t: s - t

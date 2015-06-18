@@ -8,7 +8,7 @@ fo = open(fname, "w")
 
 for n_log in range(n_min,n_max):
 	n=pow(2,n_log)
-	top_n=n
+	top_n=n*n
 	B_proj,B_error,K,K_error=main_fn(n,thres,top_n)
 	num_k=0
 	for i in range(n):
@@ -19,7 +19,8 @@ for n_log in range(n_min,n_max):
 	num_b =0
 	for i in range(n):
 		num_b=num_b+B_error[i]
-
+	print K_error
+	print K
 
 	print "n = ", n, "\n"
 	fo.write("n = "+str(n) + "\n")

@@ -49,8 +49,28 @@ def get_pix(x,B_norm,n):
 #     return B1_proj,B2_proj
 def plot_it():
 
-    n=4
+    n=64
+    dist=1
     B1,B2=main_fn(n,0.001,16*9) 
+    m=linspace(0,1-0.00000001,250)
+    pyplot.plot(m,[get_pix(x,B2,n) for x in m])
+    pyplot.grid(True)
+    pyplot.ylabel('B1(x)')
+    pyplot.xlabel('x')
+
+    # print y ,"y"
+    pyplot.show()
+
+
+    pyplot.plot(m,[get_pix(x,B1,n) for x in m],'b')
+
+    # pyplot.plot(pix1)
+    pyplot.ylabel('B2(y)')
+    pyplot.xlabel('y')
+
+    # print y ,"y"
+    pyplot.grid(True)
+    pyplot.show()
     # B1 = [ 1]*8
     # B2 =  [ 1]*8
     # B1 = [   0.0179987374259207,  0.00109046436648919,   0.0210336946311762, 0.000612308039260389,   0.0218859058672152,-0.000140315475224752,    0.520100786697704,-0.000860807260604174]
@@ -102,12 +122,7 @@ def plot_it():
         if pix2[i]>max:
             max = pix2[i]
     print "max",max
-    pyplot.plot(pix2)
-    # print y ,"y"
-    pyplot.show()
-    pyplot.plot(pix1)
-    # print y ,"y"
-    pyplot.show()
+
     # for i in range(x-1):
     #     diff[i]=pix[i+1]-pix[i]
     #     if diff[i]<0:
